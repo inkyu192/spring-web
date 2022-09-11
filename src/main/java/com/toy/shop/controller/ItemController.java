@@ -1,7 +1,7 @@
 package com.toy.shop.controller;
 
-import com.toy.shop.controller.dto.ItemSaveDTO;
-import com.toy.shop.controller.dto.ItemUpdateDTO;
+import com.toy.shop.controller.dto.ItemSaveDto;
+import com.toy.shop.controller.dto.ItemUpdateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public Object addItem(@RequestBody @Valid ItemSaveDTO dto, BindingResult bindingResult) {
+    public Object addItem(@RequestBody @Valid ItemSaveDto dto, BindingResult bindingResult) {
         log.info("상품 등록 API 호출");
 
         if (bindingResult.hasErrors()) {
@@ -38,7 +38,7 @@ public class ItemController {
     }
 
     @PatchMapping("{id}")
-    public Object patchItem(@PathVariable String id, @RequestBody @Valid ItemUpdateDTO dto, BindingResult bindingResult) {
+    public Object patchItem(@PathVariable String id, @RequestBody @Valid ItemUpdateDto dto, BindingResult bindingResult) {
         log.info("상품 수정 API 호출");
 
         if (dto.getPrice() != null && dto.getQuantity() != null) {
