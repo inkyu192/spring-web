@@ -2,8 +2,10 @@ package com.toy.shop.controller;
 
 import com.toy.shop.controller.dto.ItemSaveDto;
 import com.toy.shop.controller.dto.ItemUpdateDto;
+import com.toy.shop.exception.UserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,17 +17,12 @@ public class ItemController {
 
     @GetMapping
     public Object items() {
-        return new Object();
+        throw new UserException("사용자 에러");
     }
 
     @PostMapping
-    public Object addItem(@RequestBody @Valid ItemSaveDto dto, BindingResult bindingResult) {
+    public Object addItem(@RequestBody @Valid ItemSaveDto dto) {
         log.info("상품 등록 API 호출");
-
-        if (bindingResult.hasErrors()) {
-            log.info("검증 오류 발생 errors: {}", bindingResult);
-            return bindingResult.getAllErrors();
-        }
 
         log.info("상품 등록 API 정상 응답");
 
@@ -38,20 +35,10 @@ public class ItemController {
     }
 
     @PatchMapping("{id}")
-    public Object patchItem(@PathVariable String id, @RequestBody @Valid ItemUpdateDto dto, BindingResult bindingResult) {
+    public Object patchItem(@PathVariable String id, @RequestBody @Valid ItemUpdateDto dto) {
         log.info("상품 수정 API 호출");
 
-        if (dto.getPrice() != null && dto.getQuantity() != null) {
-            int resultPrice = dto.getPrice() * dto.getQuantity();
-            if (resultPrice < 10000) {
-                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
-            }
-        }
-
-        if (bindingResult.hasErrors()) {
-            log.info("검증 오류 발생 errors: {}", bindingResult);
-            return bindingResult.getAllErrors();
-        }
+        log.info("상품 수정 API 정상 응답");
 
         return dto;
     }

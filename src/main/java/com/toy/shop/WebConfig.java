@@ -1,4 +1,4 @@
-package com.toy.shop.config;
+package com.toy.shop;
 
 import com.toy.shop.interceptor.LogInterceptor;
 import org.springframework.context.annotation.Configuration;
