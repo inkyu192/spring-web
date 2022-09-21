@@ -1,9 +1,6 @@
-package com.toy.shop.domain;
+package com.toy.shop.Entity;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,13 +10,17 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Item extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "item_id")
-    private String id;
+    private Long id;
 
     private String name;
     private int price;
+
+    public Item(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
 }
