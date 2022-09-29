@@ -1,7 +1,7 @@
 package com.toy.shop.service;
 
-import com.toy.shop.Entity.Item;
-import com.toy.shop.repository.ItemRepository;
+import com.toy.shop.entity.Book;
+import com.toy.shop.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ItemService {
+public class BookService {
 
-    private final ItemRepository itemRepository;
+    private final BookRepository bookRepository;
 
 //    private final ItemQueryRepository itemQueryRepository;
 
-    public Item save(Item item) {
-        return itemRepository.save(item);
+    public Book save(Book book) {
+        return bookRepository.save(book);
     }
 }

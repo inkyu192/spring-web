@@ -1,7 +1,5 @@
 package com.toy.shop.controller.dto;
 
-import com.toy.shop.Entity.Item;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.Max;
@@ -10,11 +8,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Getter
-public class ItemSaveResponse {
+public class BookSaveRequest {
 
-    private Long id;
+    @NotEmpty
+    private String name;
 
-    public ItemSaveResponse(Item item) {
-        id = item.getId();
-    }
+    @NotNull
+    @Min(100)
+    private Integer price;
+
+    @NotNull
+    @Max(value = 9999)
+    private Integer quantity;
 }

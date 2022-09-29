@@ -1,4 +1,4 @@
-package com.toy.shop.Entity;
+package com.toy.shop.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
