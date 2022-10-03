@@ -1,6 +1,6 @@
 package com.toy.shop.service;
 
-import com.toy.shop.entity.Book;
+import com.toy.shop.domain.Book;
 import com.toy.shop.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

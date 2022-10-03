@@ -1,4 +1,4 @@
-package com.toy.shop.entity;
+package com.toy.shop.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity extends BaseTimeEntity {
+public class BaseDomain extends BaseTimeDomain {
 
     @CreatedBy
     @Column(updatable = false)

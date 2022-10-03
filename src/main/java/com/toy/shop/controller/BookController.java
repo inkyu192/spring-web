@@ -1,6 +1,6 @@
 package com.toy.shop.controller;
 
-import com.toy.shop.entity.Book;
+import com.toy.shop.domain.Book;
 import com.toy.shop.controller.dto.BookSaveRequest;
 import com.toy.shop.controller.dto.BookSaveResponse;
 import com.toy.shop.controller.dto.BookUpdateRequest;

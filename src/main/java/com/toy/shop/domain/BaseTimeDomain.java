@@ -1,4 +1,4 @@
-package com.toy.shop.entity;
+package com.toy.shop.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class BaseTimeEntity {
+public class BaseTimeDomain {
 
     @CreatedDate
     @Column(updatable = false)
