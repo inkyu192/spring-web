@@ -21,11 +21,4 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Book> books = new ArrayList<>();
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Category parent;
-
-    @OneToMany(mappedBy = "parent")
-    private List<Category> child = new ArrayList<>();
 }
