@@ -6,7 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 @Getter
-public class BookUpdateRequest {
+public class BookUpdateRequestDto {
 
     private String name;
 

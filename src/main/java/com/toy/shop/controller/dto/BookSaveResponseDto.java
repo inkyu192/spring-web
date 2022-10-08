@@ -4,11 +4,11 @@ import com.toy.shop.domain.Book;
 import lombok.Getter;
 
 @Getter
-public class BookSaveResponse {
+public class BookSaveResponseDto {
 
     private Long id;
 
-    public BookSaveResponse(Book book) {
+    public BookSaveResponseDto(Book book) {
         id = book.getId();
     }
 }

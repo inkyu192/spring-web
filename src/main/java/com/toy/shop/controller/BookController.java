@@ -1,9 +1,9 @@
 package com.toy.shop.controller;
 
 import com.toy.shop.domain.Book;
-import com.toy.shop.controller.dto.BookSaveRequest;
-import com.toy.shop.controller.dto.BookSaveResponse;
-import com.toy.shop.controller.dto.BookUpdateRequest;
+import com.toy.shop.controller.dto.BookSaveRequestDto;
+import com.toy.shop.controller.dto.BookSaveResponseDto;
+import com.toy.shop.controller.dto.BookUpdateRequestDto;
 import com.toy.shop.controller.dto.ApiResultResponse;
 import com.toy.shop.exception.UserException;
 import com.toy.shop.service.BookService;
@@ -30,12 +30,10 @@ public class BookController {
     }
 
     @PostMapping
-    public ApiResultResponse addBook(@RequestBody @Valid BookSaveRequest request) {
-        log.info("상품 등록 API 호출");
+    public ApiResultResponse addBook(@RequestBody @Valid BookSaveRequestDto requestDto) {
+        BookSaveResponseDto responseDto = bookService.save(requestDto);
 
-        Book book = bookService.save(new Book(request.getName(), request.getPrice()));
-
-        return new ApiResultResponse<>(new BookSaveResponse(book));
+        return new ApiResultResponse<>(responseDto);
     }
 
     @GetMapping("/{id}")
@@ -49,7 +47,7 @@ public class BookController {
     }
 
     @PatchMapping("{id}")
-    public Object patchBook(@PathVariable String id, @RequestBody @Valid BookUpdateRequest dto) {
+    public Object patchBook(@PathVariable String id, @RequestBody @Valid BookUpdateRequestDto dto) {
         log.info("상품 수정 API 호출");
 
         return dto;

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Getter
-public class BookSaveRequest {
+public class BookSaveRequestDto {
 
     @NotEmpty
     private String name;

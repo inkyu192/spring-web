@@ -1,12 +1,13 @@
 package com.toy.shop.domain;
 
+import com.toy.shop.controller.dto.BookSaveRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Book extends BaseDomain {
 
     @Id
@@ -24,8 +25,11 @@ public class Book extends BaseDomain {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Book(String name, int price) {
-        this.name = name;
-        this.price = price;
+    public static Book createBook(BookSaveRequestDto requestDto) {
+        Book book = new Book();
+        book.name = requestDto.getName();
+        book.price = requestDto.getPrice();
+
+        return book;
     }
 }
