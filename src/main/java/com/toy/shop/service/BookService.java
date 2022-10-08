@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.toy.shop.common.ResultCode.BOOK_NOT_FOUND;
 
 @Service
@@ -19,6 +22,16 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final BookQueryRepository bookQueryRepository;
+
+    public List<BookResponseDto> findAll(Long categoryId, String searchWord) {
+        List<Book> findBooks = bookQueryRepository.findAll(categoryId, searchWord);
+
+        List<BookResponseDto> collect = findBooks.stream()
+                .map(BookResponseDto::new)
+                .collect(Collectors.toList());
+
+        return collect;
+    }
 
     public BookResponseDto save(BookSaveRequestDto requestDto) {
         Book book = Book.createBook(requestDto);

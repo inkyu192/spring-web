@@ -16,7 +16,7 @@ public class Book extends BaseTimeDomain {
     private Long id;
 
     private String name;
-    private String desc;
+    private String description;
     private String author;
     private String publisher;
     private int price;
