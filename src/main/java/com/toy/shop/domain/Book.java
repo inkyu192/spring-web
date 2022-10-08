@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Book extends BaseDomain {
+public class Book extends BaseTimeDomain {
 
     @Id
     @GeneratedValue
