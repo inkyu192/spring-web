@@ -1,5 +1,6 @@
 package com.toy.shop.domain;
 
+import com.toy.shop.controller.dto.CategorySaveRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,11 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Book> books = new ArrayList<>();
+
+    public static Category createCategory(CategorySaveRequestDto requestDto) {
+        Category category = new Category();
+        category.name = requestDto.getName();
+
+        return category;
+    }
 }

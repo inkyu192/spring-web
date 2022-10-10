@@ -3,7 +3,7 @@ package com.toy.shop.service;
 import com.toy.shop.controller.dto.BookResponseDto;
 import com.toy.shop.controller.dto.BookSaveRequestDto;
 import com.toy.shop.domain.Book;
-import com.toy.shop.exception.NotFoundException;
+import com.toy.shop.exception.DataNotFoundException;
 import com.toy.shop.repository.BookQueryRepository;
 import com.toy.shop.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,7 @@ public class BookService {
     }
 
     public BookResponseDto findById(Long id) {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new NotFoundException(BOOK_NOT_FOUND));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
 
         return new BookResponseDto(book);
     }
