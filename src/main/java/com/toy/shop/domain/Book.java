@@ -25,10 +25,11 @@ public class Book extends BaseTimeDomain {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public static Book createBook(BookSaveRequestDto requestDto) {
+    public static Book createBook(BookSaveRequestDto requestDto, Category category) {
         Book book = new Book();
         book.name = requestDto.getName();
         book.price = requestDto.getPrice();
+        book.category = category;
 
         return book;
     }

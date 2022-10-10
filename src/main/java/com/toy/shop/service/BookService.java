@@ -3,9 +3,11 @@ package com.toy.shop.service;
 import com.toy.shop.controller.dto.BookResponseDto;
 import com.toy.shop.controller.dto.BookSaveRequestDto;
 import com.toy.shop.domain.Book;
+import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;
 import com.toy.shop.repository.BookQueryRepository;
 import com.toy.shop.repository.BookRepository;
+import com.toy.shop.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,8 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookQueryRepository bookQueryRepository;
 
+    private final CategoryRepository categoryRepository;
+
     public List<BookResponseDto> findAll(Long categoryId, String searchWord) {
         List<Book> findBooks = bookQueryRepository.findAll(categoryId, searchWord);
 
@@ -34,7 +38,9 @@ public class BookService {
     }
 
     public BookResponseDto save(BookSaveRequestDto requestDto) {
-        Book book = Book.createBook(requestDto);
+        Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
+
+        Book book = Book.createBook(requestDto, category);
 
         bookRepository.save(book);
 

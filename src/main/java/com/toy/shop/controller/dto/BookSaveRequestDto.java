@@ -14,6 +14,9 @@ public class BookSaveRequestDto {
     private String name;
 
     @NotNull
+    private Long categoryId;
+
+    @NotNull
     @Min(100)
     private Integer price;
 
