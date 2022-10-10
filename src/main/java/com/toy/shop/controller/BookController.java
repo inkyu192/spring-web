@@ -24,21 +24,21 @@ public class BookController {
             @RequestParam(required = false) String searchWord) {
         List<BookResponseDto> list = bookService.findAll(categoryId, searchWord);
 
-        return new ResultDto<>(list);
+        return new ResultDto(list);
     }
 
     @PostMapping
     public ResultDto addBook(@RequestBody @Valid BookSaveRequestDto requestDto) {
         BookResponseDto responseDto = bookService.save(requestDto);
 
-        return new ResultDto<>(responseDto);
+        return new ResultDto(responseDto);
     }
 
     @GetMapping("/{id}")
     public ResultDto book(@PathVariable Long id) {
         BookResponseDto responseDto = bookService.findById(id);
 
-        return new ResultDto<>(responseDto);
+        return new ResultDto(responseDto);
     }
 
 //    @PatchMapping("{id}")

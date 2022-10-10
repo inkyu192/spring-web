@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.toy.shop.common.ResultCode.BOOK_NOT_FOUND;
+import static com.toy.shop.common.ResultCode.*;
 
 @Service
 @Transactional
