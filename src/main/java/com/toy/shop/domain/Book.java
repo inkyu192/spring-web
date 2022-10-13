@@ -20,6 +20,7 @@ public class Book extends BaseTimeDomain {
     private String author;
     private String publisher;
     private int price;
+    private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -27,8 +28,13 @@ public class Book extends BaseTimeDomain {
 
     public static Book createBook(BookSaveRequestDto requestDto, Category category) {
         Book book = new Book();
+
         book.name = requestDto.getName();
+        book.description = requestDto.getDescription();
+        book.author = requestDto.getAuthor();
+        book.publisher = requestDto.getPublisher();
         book.price = requestDto.getPrice();
+        book.quantity = requestDto.getQuantity();
         book.category = category;
 
         return book;

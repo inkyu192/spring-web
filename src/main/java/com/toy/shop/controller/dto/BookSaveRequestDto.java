@@ -13,14 +13,23 @@ public class BookSaveRequestDto {
     @NotEmpty
     private String name;
 
-    @NotNull
-    private Long categoryId;
+    @NotEmpty
+    private String description;
+
+    @NotEmpty
+    private String publisher;
+
+    @NotEmpty
+    private String author;
 
     @NotNull
     @Min(100)
-    private Integer price;
+    private int price;
 
     @NotNull
     @Max(value = 9999)
-    private Integer quantity;
+    private int quantity;
+
+    @NotNull
+    private Long categoryId;
 }

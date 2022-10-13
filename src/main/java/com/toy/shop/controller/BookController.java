@@ -5,7 +5,6 @@ import com.toy.shop.controller.dto.BookResponseDto;
 import com.toy.shop.controller.dto.BookSaveRequestDto;
 import com.toy.shop.service.BookService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
