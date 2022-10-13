@@ -39,7 +39,10 @@ public class BookQueryRepository {
 
     private BooleanExpression likeSearchWord(String searchWord) {
         if (StringUtils.hasText(searchWord)) {
-            return book.name.like("%" + searchWord + "%");
+            return book.name.like("%" + searchWord + "%")
+                    .or(book.description.like("%" + searchWord + "%"))
+                    .or(book.author.like("%" + searchWord + "%"))
+                    .or(book.publisher.like("%" + searchWord + "%"));
         }
         return null;
     }
