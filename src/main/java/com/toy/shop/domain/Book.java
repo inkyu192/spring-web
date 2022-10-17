@@ -1,6 +1,7 @@
 package com.toy.shop.domain;
 
 import com.toy.shop.controller.dto.BookSaveRequestDto;
+import com.toy.shop.controller.dto.BookUpdateRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,5 +39,11 @@ public class Book extends BaseTimeDomain {
         book.category = category;
 
         return book;
+    }
+
+    public void updateBook(BookUpdateRequestDto requestDto) {
+        this.name = requestDto.getName();
+        this.price = requestDto.getPrice();
+        this.quantity = requestDto.getQuantity();
     }
 }

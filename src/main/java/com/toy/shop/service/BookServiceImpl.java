@@ -2,6 +2,7 @@ package com.toy.shop.service;
 
 import com.toy.shop.controller.dto.BookResponseDto;
 import com.toy.shop.controller.dto.BookSaveRequestDto;
+import com.toy.shop.controller.dto.BookUpdateRequestDto;
 import com.toy.shop.domain.Book;
 import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;
@@ -48,12 +49,21 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookResponseDto> findAll(Long categoryId, String searchWord) {
-        List<Book> findBooks = bookQueryRepository.findAll(categoryId, searchWord);
+        List<Book> books = bookQueryRepository.findAll(categoryId, searchWord);
 
-        List<BookResponseDto> collect = findBooks.stream()
+        List<BookResponseDto> collect = books.stream()
                 .map(BookResponseDto::new)
                 .collect(Collectors.toList());
 
         return collect;
+    }
+
+    @Override
+    public BookResponseDto update(Long id, BookUpdateRequestDto requestDto) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
+
+        book.updateBook(requestDto);
+
+        return new BookResponseDto(book);
     }
 }
