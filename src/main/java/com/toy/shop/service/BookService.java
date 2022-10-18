@@ -15,4 +15,6 @@ public interface BookService {
     List<BookResponseDto> findAll(Long categoryId, String searchWord);
 
     BookResponseDto update(Long id, BookUpdateRequestDto requestDto);
+
+    void delete(Long id);
 }

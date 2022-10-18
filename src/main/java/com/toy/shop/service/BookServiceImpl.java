@@ -66,4 +66,11 @@ public class BookServiceImpl implements BookService {
 
         return new BookResponseDto(book);
     }
+
+    @Override
+    public void delete(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
+
+        bookRepository.delete(book);
+    }
 }

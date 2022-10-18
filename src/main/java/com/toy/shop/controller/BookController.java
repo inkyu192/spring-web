@@ -43,11 +43,13 @@ public class BookController {
     public Object patchBook(@PathVariable Long id, @RequestBody @Valid BookUpdateRequestDto dto) {
         BookResponseDto update = bookService.update(id, dto);
 
-        return new ResultDto<>(update);
+        return new ResultDto(update);
     }
 
-//    @DeleteMapping("{id}")
-//    public Object deleteBook(@PathVariable String id) {
-//        return new Object();
-//    }
+    @DeleteMapping("{id}")
+    public Object deleteBook(@PathVariable Long id) {
+        bookService.delete(id);
+
+        return new ResultDto(null);
+    }
 }
