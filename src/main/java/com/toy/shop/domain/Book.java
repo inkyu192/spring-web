@@ -2,13 +2,12 @@ package com.toy.shop.domain;
 
 import com.toy.shop.controller.dto.BookSaveRequestDto;
 import com.toy.shop.controller.dto.BookUpdateRequestDto;
-import lombok.*;
+import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
 public class Book extends BaseTimeDomain {
 
     @Id
