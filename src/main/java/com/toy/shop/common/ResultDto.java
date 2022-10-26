@@ -6,11 +6,11 @@ import lombok.Getter;
 import static com.toy.shop.common.ResultCode.SUCCESS;
 
 @Getter
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultDto<T> {
 
     private String resultCode;
     private String resultMessage;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
     public ResultDto(T data) {
@@ -19,9 +19,8 @@ public class ResultDto<T> {
         this.data = data;
     }
 
-    public ResultDto(String resultCode, String resultMessage, T data) {
+    public ResultDto(String resultCode, String resultMessage) {
         this.resultCode = resultCode;
         this.resultMessage = resultMessage;
-        this.data = data;
     }
 }

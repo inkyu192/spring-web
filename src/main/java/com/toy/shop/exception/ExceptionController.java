@@ -20,7 +20,7 @@ public class ExceptionController {
     public ResultDto NotFoundExceptionHandler(DataNotFoundException e) {
         ResultCode resultCode = e.getResultCode();
 
-        return new ResultDto(resultCode.getCode(), resultCode.getMessage(), null);
+        return new ResultDto(resultCode.getCode(), resultCode.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -28,13 +28,14 @@ public class ExceptionController {
     public ResultDto MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         log.error("[MethodArgumentNotValidExceptionHandler]", e);
 
-        return new ResultDto(NOT_VALID.getCode(), NOT_VALID.getMessage(), null);
+        return new ResultDto(NOT_VALID.getCode(), NOT_VALID.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ResultDto ExceptionHandler(Exception e) {
         log.error("[ExceptionHandler]", e);
 
-        return new ResultDto(ERROR.getCode(), ERROR.getMessage(), null);
+        return new ResultDto(ERROR.getCode(), ERROR.getMessage());
     }
 }
