@@ -24,11 +24,11 @@ public class BookSaveRequestDto {
 
     @NotNull
     @Min(100)
-    private int price;
+    private Integer price;
 
     @NotNull
     @Max(value = 9999)
-    private int quantity;
+    private Integer quantity;
 
     @NotNull
     private Long categoryId;

@@ -61,8 +61,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponseDto update(Long id, BookUpdateRequestDto requestDto) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
+        Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
 
-        book.updateBook(requestDto);
+        book.updateBook(requestDto, category);
 
         return new BookResponseDto(book);
     }

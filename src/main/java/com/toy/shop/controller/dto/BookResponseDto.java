@@ -13,8 +13,8 @@ public class BookResponseDto {
     private String description;
     private String author;
     private String publisher;
-    private int price;
-    private int quantity;
+    private Integer price;
+    private Integer quantity;
     private Long categoryId;
 
     public BookResponseDto(Book book) {

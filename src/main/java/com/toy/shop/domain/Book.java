@@ -19,8 +19,8 @@ public class Book extends BaseTimeDomain {
     private String description;
     private String author;
     private String publisher;
-    private int price;
-    private int quantity;
+    private Integer price;
+    private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -40,9 +40,13 @@ public class Book extends BaseTimeDomain {
         return book;
     }
 
-    public void updateBook(BookUpdateRequestDto requestDto) {
+    public void updateBook(BookUpdateRequestDto requestDto, Category category) {
         this.name = requestDto.getName();
+        this.description = requestDto.getDescription();
+        this.author = requestDto.getAuthor();
+        this.publisher = requestDto.getPublisher();
         this.price = requestDto.getPrice();
         this.quantity = requestDto.getQuantity();
+        this.category = category;
     }
 }
