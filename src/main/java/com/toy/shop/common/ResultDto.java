@@ -19,8 +19,9 @@ public class ResultDto<T> {
         this.data = data;
     }
 
-    public ResultDto(String resultCode, String resultMessage) {
+    public ResultDto(String resultCode, String resultMessage, T data) {
         this.resultCode = resultCode;
         this.resultMessage = resultMessage;
+        this.data = data;
     }
 }

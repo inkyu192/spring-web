@@ -4,10 +4,14 @@ import com.toy.shop.common.ResultCode;
 import com.toy.shop.common.ResultDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.toy.shop.common.ResultCode.ERROR;
 import static com.toy.shop.common.ResultCode.NOT_VALID;
@@ -20,7 +24,7 @@ public class ExceptionController {
     public ResultDto NotFoundExceptionHandler(DataNotFoundException e) {
         ResultCode resultCode = e.getResultCode();
 
-        return new ResultDto(resultCode.getCode(), resultCode.getMessage());
+        return new ResultDto(resultCode.getCode(), resultCode.getMessage(), null);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -28,7 +32,13 @@ public class ExceptionController {
     public ResultDto MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         log.error("[MethodArgumentNotValidExceptionHandler]", e);
 
-        return new ResultDto(NOT_VALID.getCode(), NOT_VALID.getMessage());
+        ArrayList<String> errors = new ArrayList<>();
+        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        for (FieldError fieldError : fieldErrors) {
+            errors.add(fieldError.getField());
+        }
+
+        return new ResultDto(NOT_VALID.getCode(), NOT_VALID.getMessage(), errors);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -36,6 +46,6 @@ public class ExceptionController {
     public ResultDto ExceptionHandler(Exception e) {
         log.error("[ExceptionHandler]", e);
 
-        return new ResultDto(ERROR.getCode(), ERROR.getMessage());
+        return new ResultDto(ERROR.getCode(), ERROR.getMessage(), null);
     }
 }
