@@ -33,6 +33,7 @@ public class ExceptionController {
         log.error("[MethodArgumentNotValidExceptionHandler]", e);
 
         ArrayList<String> errors = new ArrayList<>();
+
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         for (FieldError fieldError : fieldErrors) {
             errors.add(fieldError.getField());
