@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.toy.shop.common.ResultCode.*;
 
 @Service
@@ -32,5 +35,16 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
 
         return new CategoryResponseDto(category);
+    }
+
+    @Override
+    public List<CategoryResponseDto> findAll() {
+        List<Category> categories = categoryRepository.findAll();
+
+        List<CategoryResponseDto> collect = categories.stream()
+                .map(CategoryResponseDto::new)
+                .collect(Collectors.toList());
+
+        return collect;
     }
 }

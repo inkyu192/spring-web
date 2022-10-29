@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
@@ -15,6 +16,13 @@ import javax.validation.Valid;
 public class CategoryController {
 
     private final CategoryService categoryService;
+
+    @GetMapping
+    public ResultDto categories() {
+        List<CategoryResponseDto> list = categoryService.findAll();
+
+        return new ResultDto(list);
+    }
 
     @PostMapping
     public ResultDto addCategory(@RequestBody @Valid CategorySaveRequestDto requestDto) {
