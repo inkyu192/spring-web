@@ -1,6 +1,7 @@
 package com.toy.shop.domain;
 
 import com.toy.shop.controller.dto.CategorySaveRequestDto;
+import com.toy.shop.controller.dto.CategoryUpdateRequestDto;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -25,5 +26,9 @@ public class Category {
         category.name = requestDto.getName();
 
         return category;
+    }
+
+    public void updateCategory(CategoryUpdateRequestDto requestDto) {
+        this.name = requestDto.getName();
     }
 }

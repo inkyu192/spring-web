@@ -2,6 +2,7 @@ package com.toy.shop.service;
 
 import com.toy.shop.controller.dto.CategoryResponseDto;
 import com.toy.shop.controller.dto.CategorySaveRequestDto;
+import com.toy.shop.controller.dto.CategoryUpdateRequestDto;
 import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;
 import com.toy.shop.repository.CategoryRepository;
@@ -46,5 +47,14 @@ public class CategoryServiceImpl implements CategoryService {
                 .collect(Collectors.toList());
 
         return collect;
+    }
+
+    @Override
+    public CategoryResponseDto update(Long id, CategoryUpdateRequestDto requestDto) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
+
+        category.updateCategory(requestDto);
+
+        return new CategoryResponseDto(category);
     }
 }
