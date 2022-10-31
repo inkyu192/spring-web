@@ -45,4 +45,11 @@ public class CategoryController {
 
         return new ResultDto(responseDto);
     }
+
+    @DeleteMapping("{id}")
+    public ResultDto deleteCategory(@PathVariable Long id) {
+        categoryService.delete(id);
+
+        return new ResultDto(null);
+    }
 }
