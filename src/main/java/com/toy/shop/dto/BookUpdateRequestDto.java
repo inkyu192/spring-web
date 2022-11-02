@@ -1,4 +1,4 @@
-package com.toy.shop.controller.dto;
+package com.toy.shop.dto;
 
 import lombok.Getter;
 

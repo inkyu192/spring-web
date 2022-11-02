@@ -1,9 +1,9 @@
 package com.toy.shop.controller;
 
 import com.toy.shop.common.ResultDto;
-import com.toy.shop.controller.dto.BookResponseDto;
-import com.toy.shop.controller.dto.BookSaveRequestDto;
-import com.toy.shop.controller.dto.BookUpdateRequestDto;
+import com.toy.shop.dto.BookResponseDto;
+import com.toy.shop.dto.BookSaveRequestDto;
+import com.toy.shop.dto.BookUpdateRequestDto;
 import com.toy.shop.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

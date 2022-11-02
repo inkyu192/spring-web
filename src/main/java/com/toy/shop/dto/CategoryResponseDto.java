@@ -1,4 +1,4 @@
-package com.toy.shop.controller.dto;
+package com.toy.shop.dto;
 
 import com.toy.shop.domain.Category;
 import lombok.Getter;

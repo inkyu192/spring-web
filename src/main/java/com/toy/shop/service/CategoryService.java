@@ -1,8 +1,8 @@
 package com.toy.shop.service;
 
-import com.toy.shop.controller.dto.CategoryResponseDto;
-import com.toy.shop.controller.dto.CategorySaveRequestDto;
-import com.toy.shop.controller.dto.CategoryUpdateRequestDto;
+import com.toy.shop.dto.CategoryResponseDto;
+import com.toy.shop.dto.CategorySaveRequestDto;
+import com.toy.shop.dto.CategoryUpdateRequestDto;
 
 import java.util.List;
 

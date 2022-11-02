@@ -1,8 +1,8 @@
 package com.toy.shop.service;
 
-import com.toy.shop.controller.dto.CategoryResponseDto;
-import com.toy.shop.controller.dto.CategorySaveRequestDto;
-import com.toy.shop.controller.dto.CategoryUpdateRequestDto;
+import com.toy.shop.dto.CategoryResponseDto;
+import com.toy.shop.dto.CategorySaveRequestDto;
+import com.toy.shop.dto.CategoryUpdateRequestDto;
 import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;
 import com.toy.shop.repository.CategoryRepository;

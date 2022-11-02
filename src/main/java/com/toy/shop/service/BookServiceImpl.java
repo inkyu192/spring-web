@@ -1,8 +1,8 @@
 package com.toy.shop.service;
 
-import com.toy.shop.controller.dto.BookResponseDto;
-import com.toy.shop.controller.dto.BookSaveRequestDto;
-import com.toy.shop.controller.dto.BookUpdateRequestDto;
+import com.toy.shop.dto.BookResponseDto;
+import com.toy.shop.dto.BookSaveRequestDto;
+import com.toy.shop.dto.BookUpdateRequestDto;
 import com.toy.shop.domain.Book;
 import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;

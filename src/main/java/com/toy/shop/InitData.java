@@ -1,6 +1,6 @@
 package com.toy.shop;
 
-import com.toy.shop.controller.dto.CategorySaveRequestDto;
+import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.domain.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

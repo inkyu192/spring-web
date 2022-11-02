@@ -1,7 +1,7 @@
 package com.toy.shop.domain;
 
-import com.toy.shop.controller.dto.CategorySaveRequestDto;
-import com.toy.shop.controller.dto.CategoryUpdateRequestDto;
+import com.toy.shop.dto.CategorySaveRequestDto;
+import com.toy.shop.dto.CategoryUpdateRequestDto;
 import lombok.Getter;
 
 import javax.persistence.*;
