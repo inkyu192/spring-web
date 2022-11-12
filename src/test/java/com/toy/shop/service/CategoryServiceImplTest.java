@@ -3,7 +3,7 @@ package com.toy.shop.service;
 import com.toy.shop.domain.Category;
 import com.toy.shop.dto.CategoryResponseDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
-import com.toy.shop.repository.CategoryRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @Transactional
 @SpringBootTest
 class CategoryServiceImplTest {
@@ -22,11 +23,8 @@ class CategoryServiceImplTest {
     @Autowired
     CategoryService categoryService;
 
-    @Autowired
-    CategoryRepository categoryRepository;
-
     @PersistenceContext
-    EntityManager entityManager;
+    EntityManager em;
 
     @Test
     void save() {
@@ -35,7 +33,7 @@ class CategoryServiceImplTest {
 
         Long saveId = categoryService.save(requestDto).getId();
 
-        Category findCategory = categoryRepository.findById(saveId).get();
+        Category findCategory = em.find(Category.class, saveId);
 
         assertThat(saveId).isEqualTo(findCategory.getId());
     }
@@ -46,10 +44,10 @@ class CategoryServiceImplTest {
         requestDto.setName("category1");
 
         Category saveCategory = Category.createCategory(requestDto);
-        categoryRepository.save(saveCategory);
+        em.persist(saveCategory);
 
-        entityManager.flush();
-        entityManager.clear();
+        em.flush();
+        em.clear();
 
         CategoryResponseDto responseDto = categoryService.findById(saveCategory.getId());
 
