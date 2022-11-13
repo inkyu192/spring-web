@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -52,5 +54,31 @@ class CategoryServiceImplTest {
         CategoryResponseDto responseDto = categoryService.findById(saveCategory.getId());
 
         Assertions.assertThat(saveCategory.getId()).isEqualTo(responseDto.getId());
+    }
+
+    @Test
+    void findAll() {
+        CategorySaveRequestDto requestDto1 = new CategorySaveRequestDto();
+        requestDto1.setName("category1");
+
+        Category saveCategory1 = Category.createCategory(requestDto1);
+        em.persist(saveCategory1);
+
+        CategorySaveRequestDto requestDto2 = new CategorySaveRequestDto();
+        requestDto2.setName("category2");
+
+        Category saveCategory2 = Category.createCategory(requestDto2);
+        em.persist(saveCategory2);
+
+        em.flush();
+        em.clear();
+
+        List<CategoryResponseDto> list = categoryService.findAll();
+
+        List<Long> collect = list.stream()
+                .map(CategoryResponseDto::getId)
+                .toList();
+
+        Assertions.assertThat(collect).containsOnly(saveCategory1.getId(), saveCategory2.getId());
     }
 }
