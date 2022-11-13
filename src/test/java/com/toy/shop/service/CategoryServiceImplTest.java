@@ -4,6 +4,7 @@ import com.toy.shop.domain.Category;
 import com.toy.shop.dto.CategoryResponseDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
+import com.toy.shop.exception.DataNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -92,16 +93,34 @@ class CategoryServiceImplTest {
         Category saveCategory = Category.createCategory(saveRequestDto);
         em.persist(saveCategory);
 
+        em.flush();
+        em.clear();
+
         CategoryUpdateRequestDto updateRequestDto = new CategoryUpdateRequestDto();
         updateRequestDto.setName("category2");
 
         categoryService.update(saveCategory.getId(), updateRequestDto);
 
-        em.flush();
-        em.clear();
-
         Category category = em.find(Category.class, saveCategory.getId());
 
         assertThat(updateRequestDto.getName()).isEqualTo(category.getName());
+    }
+
+    @Test
+    void delete() {
+        CategorySaveRequestDto saveRequestDto = new CategorySaveRequestDto();
+        saveRequestDto.setName("category1");
+
+        Category saveCategory = Category.createCategory(saveRequestDto);
+        em.persist(saveCategory);
+
+        em.flush();
+        em.clear();
+
+        categoryService.delete(saveCategory.getId());
+
+        Category category = em.find(Category.class, saveCategory.getId());
+
+        assertThat(category).isNull();
     }
 }
