@@ -3,6 +3,7 @@ package com.toy.shop.service;
 import com.toy.shop.domain.Category;
 import com.toy.shop.dto.CategoryResponseDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
+import com.toy.shop.dto.CategoryUpdateRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -53,7 +55,7 @@ class CategoryServiceImplTest {
 
         CategoryResponseDto responseDto = categoryService.findById(saveCategory.getId());
 
-        Assertions.assertThat(saveCategory.getId()).isEqualTo(responseDto.getId());
+        assertThat(saveCategory.getId()).isEqualTo(responseDto.getId());
     }
 
     @Test
@@ -79,6 +81,27 @@ class CategoryServiceImplTest {
                 .map(CategoryResponseDto::getId)
                 .toList();
 
-        Assertions.assertThat(collect).containsOnly(saveCategory1.getId(), saveCategory2.getId());
+        assertThat(collect).containsOnly(saveCategory1.getId(), saveCategory2.getId());
+    }
+
+    @Test
+    void update() {
+        CategorySaveRequestDto saveRequestDto = new CategorySaveRequestDto();
+        saveRequestDto.setName("category1");
+
+        Category saveCategory = Category.createCategory(saveRequestDto);
+        em.persist(saveCategory);
+
+        CategoryUpdateRequestDto updateRequestDto = new CategoryUpdateRequestDto();
+        updateRequestDto.setName("category2");
+
+        categoryService.update(saveCategory.getId(), updateRequestDto);
+
+        em.flush();
+        em.clear();
+
+        Category category = em.find(Category.class, saveCategory.getId());
+
+        assertThat(updateRequestDto.getName()).isEqualTo(category.getName());
     }
 }
