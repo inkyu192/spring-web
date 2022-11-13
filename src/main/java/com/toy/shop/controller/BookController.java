@@ -18,13 +18,6 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping
-    public ResultDto books(@RequestParam(required = false) Long categoryId, @RequestParam(required = false) String searchWord) {
-        List<BookResponseDto> list = bookService.findAll(categoryId, searchWord);
-
-        return new ResultDto(list);
-    }
-
     @PostMapping
     public ResultDto addBook(@RequestBody @Valid BookSaveRequestDto requestDto) {
         BookResponseDto responseDto = bookService.save(requestDto);
@@ -37,6 +30,13 @@ public class BookController {
         BookResponseDto responseDto = bookService.findById(id);
 
         return new ResultDto(responseDto);
+    }
+
+    @GetMapping
+    public ResultDto books(@RequestParam(required = false) Long categoryId, @RequestParam(required = false) String searchWord) {
+        List<BookResponseDto> list = bookService.findAll(categoryId, searchWord);
+
+        return new ResultDto(list);
     }
 
     @PatchMapping("{id}")

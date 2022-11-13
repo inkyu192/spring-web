@@ -18,13 +18,6 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping
-    public ResultDto categories() {
-        List<CategoryResponseDto> list = categoryService.findAll();
-
-        return new ResultDto(list);
-    }
-
     @PostMapping
     public ResultDto addCategory(@RequestBody @Valid CategorySaveRequestDto requestDto) {
         CategoryResponseDto responseDto = categoryService.save(requestDto);
@@ -37,6 +30,13 @@ public class CategoryController {
         CategoryResponseDto responseDto = categoryService.findById(id);
 
         return new ResultDto(responseDto);
+    }
+
+    @GetMapping
+    public ResultDto categories() {
+        List<CategoryResponseDto> list = categoryService.findAll();
+
+        return new ResultDto(list);
     }
 
     @PatchMapping("{id}")
