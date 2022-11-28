@@ -1,9 +1,7 @@
 package com.toy.shop.dto;
 
 import com.toy.shop.domain.Book;
-import com.toy.shop.domain.Category;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class BookResponseDto {

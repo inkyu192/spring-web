@@ -19,8 +19,8 @@ public class Book extends BaseTimeDomain {
     private String description;
     private String author;
     private String publisher;
-    private Integer price;
-    private Integer quantity;
+    private int price;
+    private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
