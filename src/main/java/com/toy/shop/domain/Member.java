@@ -1,5 +1,6 @@
 package com.toy.shop.domain;
 
+import com.toy.shop.dto.MemberSaveRequestDto;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -17,4 +18,13 @@ public class Member {
 
     @Embedded
     private Address address;
+
+    public static Member createMember(MemberSaveRequestDto requestDto) {
+        Member member = new Member();
+
+        member.name = requestDto.getName();
+        member.address = Address.createAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
+
+        return member;
+    }
 }
