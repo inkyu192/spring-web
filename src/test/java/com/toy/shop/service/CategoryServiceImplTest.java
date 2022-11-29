@@ -34,6 +34,9 @@ class CategoryServiceImplTest {
 
         Long saveId = categoryService.save(requestDto).getId();
 
+        em.flush();
+        em.clear();
+
         Category findCategory = em.find(Category.class, saveId);
 
         assertThat(saveId).isEqualTo(findCategory.getId());
