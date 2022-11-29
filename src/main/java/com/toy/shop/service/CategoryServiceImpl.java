@@ -5,6 +5,7 @@ import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
 import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;
+import com.toy.shop.repository.CategoryQueryRepository;
 import com.toy.shop.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    private final CategoryQueryRepository categoryQueryRepository;
+
     @Override
+
     public CategoryResponseDto save(CategorySaveRequestDto requestDto) {
         Category category = Category.createCategory(requestDto);
 
@@ -39,8 +43,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponseDto> findAll() {
-        List<Category> categories = categoryRepository.findAll();
+    public List<CategoryResponseDto> findAll(String searchWord) {
+        List<Category> categories = categoryQueryRepository.findAll(searchWord);
 
         List<CategoryResponseDto> collect = categories.stream()
                 .map(CategoryResponseDto::new)

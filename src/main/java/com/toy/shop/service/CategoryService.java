@@ -12,7 +12,7 @@ public interface CategoryService {
 
     CategoryResponseDto findById(Long id);
 
-    List<CategoryResponseDto> findAll();
+    List<CategoryResponseDto> findAll(String searchWord);
 
     CategoryResponseDto update(Long id, CategoryUpdateRequestDto requestDto);
 

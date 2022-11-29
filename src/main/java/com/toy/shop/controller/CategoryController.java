@@ -33,8 +33,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResultDto categories() {
-        List<CategoryResponseDto> list = categoryService.findAll();
+    public ResultDto categories(@RequestParam(required = false) String searchWord) {
+        List<CategoryResponseDto> list = categoryService.findAll(searchWord);
 
         return new ResultDto(list);
     }
