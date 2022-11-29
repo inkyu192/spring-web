@@ -44,6 +44,7 @@ public class BookQueryRepository {
                     .or(book.author.like("%" + searchWord + "%"))
                     .or(book.publisher.like("%" + searchWord + "%"));
         }
+
         return null;
     }
 }
