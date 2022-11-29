@@ -8,10 +8,17 @@ import static com.toy.shop.common.ResultCode.SUCCESS;
 @Getter
 public class ResultDto<T> {
 
-    private String resultCode;
-    private String resultMessage;
+    private final String resultCode;
+    private final String resultMessage;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data;
+    private final T data;
+
+    public ResultDto() {
+        this.resultCode = SUCCESS.getCode();
+        this.resultMessage = SUCCESS.getMessage();
+        this.data = null;
+    }
 
     public ResultDto(T data) {
         this.resultCode = SUCCESS.getCode();

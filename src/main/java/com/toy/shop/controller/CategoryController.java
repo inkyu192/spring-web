@@ -19,37 +19,37 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResultDto addCategory(@RequestBody @Valid CategorySaveRequestDto requestDto) {
+    public Object addCategory(@RequestBody @Valid CategorySaveRequestDto requestDto) {
         CategoryResponseDto responseDto = categoryService.save(requestDto);
 
-        return new ResultDto(responseDto);
+        return new ResultDto<>(responseDto);
     }
 
     @GetMapping("/{id}")
-    public ResultDto category(@PathVariable Long id) {
+    public Object category(@PathVariable Long id) {
         CategoryResponseDto responseDto = categoryService.findById(id);
 
-        return new ResultDto(responseDto);
+        return new ResultDto<>(responseDto);
     }
 
     @GetMapping
-    public ResultDto categories(@RequestParam(required = false) String searchWord) {
+    public Object categories(@RequestParam(required = false) String searchWord) {
         List<CategoryResponseDto> list = categoryService.findAll(searchWord);
 
-        return new ResultDto(list);
+        return new ResultDto<>(list);
     }
 
     @PatchMapping("{id}")
-    public ResultDto patchCategory(@PathVariable Long id, @RequestBody @Valid CategoryUpdateRequestDto requestDto) {
+    public Object patchCategory(@PathVariable Long id, @RequestBody @Valid CategoryUpdateRequestDto requestDto) {
         CategoryResponseDto responseDto = categoryService.update(id, requestDto);
 
-        return new ResultDto(responseDto);
+        return new ResultDto<>(responseDto);
     }
 
     @DeleteMapping("{id}")
-    public ResultDto deleteCategory(@PathVariable Long id) {
+    public Object deleteCategory(@PathVariable Long id) {
         categoryService.delete(id);
 
-        return new ResultDto(null);
+        return new ResultDto<>();
     }
 }
