@@ -75,7 +75,7 @@ class CategoryServiceImplTest {
         em.flush();
         em.clear();
 
-        List<CategoryResponseDto> list = categoryService.findAll();
+        List<CategoryResponseDto> list = categoryService.findAll(null);
 
         List<Long> collect = list.stream()
                 .map(CategoryResponseDto::getId)
