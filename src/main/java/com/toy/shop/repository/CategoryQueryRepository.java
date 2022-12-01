@@ -1,10 +1,8 @@
 package com.toy.shop.repository;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Category;
-import com.toy.shop.domain.QCategory;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -16,14 +14,14 @@ import static com.toy.shop.domain.QCategory.*;
 @Repository
 public class CategoryQueryRepository {
 
-    private final JPAQueryFactory query;
+    private final JPAQueryFactory queryFactory;
 
-    public CategoryQueryRepository(EntityManager em) {
-        this.query = new JPAQueryFactory(em);
+    public CategoryQueryRepository(EntityManager entityManager) {
+        this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
     public List<Category> findAll(String searchWord) {
-        return query.select(category)
+        return queryFactory.select(category)
                 .from(category)
                 .where(likeSearchWord(searchWord))
                 .fetch();

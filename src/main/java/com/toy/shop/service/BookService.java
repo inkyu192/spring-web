@@ -10,9 +10,9 @@ public interface BookService {
 
     BookResponseDto save(BookSaveRequestDto requestDto);
 
-    BookResponseDto findById(Long id);
-
     List<BookResponseDto> findAll(Long categoryId, String searchWord);
+
+    BookResponseDto findById(Long id);
 
     BookResponseDto update(Long id, BookUpdateRequestDto requestDto);
 

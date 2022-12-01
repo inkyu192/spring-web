@@ -14,14 +14,14 @@ import static com.toy.shop.domain.QBook.book;
 @Repository
 public class BookQueryRepository {
 
-    private final JPAQueryFactory query;
+    private final JPAQueryFactory queryFactory;
 
-    public BookQueryRepository(EntityManager em) {
-        this.query = new JPAQueryFactory(em);
+    public BookQueryRepository(EntityManager entityManager) {
+        this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
     public List<Book> findAll(Long categoryId, String searchWord) {
-        return query.select(book)
+        return queryFactory.select(book)
                 .from(book)
                 .where(
                         categoryId(categoryId),

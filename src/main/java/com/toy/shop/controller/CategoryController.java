@@ -19,15 +19,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public Object addCategory(@RequestBody @Valid CategorySaveRequestDto requestDto) {
+    public Object saveCategory(@RequestBody @Valid CategorySaveRequestDto requestDto) {
         CategoryResponseDto responseDto = categoryService.save(requestDto);
-
-        return new ResultDto<>(responseDto);
-    }
-
-    @GetMapping("/{id}")
-    public Object category(@PathVariable Long id) {
-        CategoryResponseDto responseDto = categoryService.findById(id);
 
         return new ResultDto<>(responseDto);
     }
@@ -39,8 +32,15 @@ public class CategoryController {
         return new ResultDto<>(list);
     }
 
+    @GetMapping("/{id}")
+    public Object category(@PathVariable Long id) {
+        CategoryResponseDto responseDto = categoryService.findById(id);
+
+        return new ResultDto<>(responseDto);
+    }
+
     @PatchMapping("{id}")
-    public Object patchCategory(@PathVariable Long id, @RequestBody @Valid CategoryUpdateRequestDto requestDto) {
+    public Object updateCategory(@PathVariable Long id, @RequestBody @Valid CategoryUpdateRequestDto requestDto) {
         CategoryResponseDto responseDto = categoryService.update(id, requestDto);
 
         return new ResultDto<>(responseDto);

@@ -10,9 +10,9 @@ public interface CategoryService {
 
     CategoryResponseDto save(CategorySaveRequestDto requestDto);
 
-    CategoryResponseDto findById(Long id);
-
     List<CategoryResponseDto> findAll(String searchWord);
+
+    CategoryResponseDto findById(Long id);
 
     CategoryResponseDto update(Long id, CategoryUpdateRequestDto requestDto);
 

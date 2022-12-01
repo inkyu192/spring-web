@@ -41,21 +41,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookResponseDto> findAll(Long categoryId, String searchWord) {
+        List<Book> books = bookQueryRepository.findAll(categoryId, searchWord);
+
+        return books.stream()
+                .map(BookResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public BookResponseDto findById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
 
         return new BookResponseDto(book);
-    }
-
-    @Override
-    public List<BookResponseDto> findAll(Long categoryId, String searchWord) {
-        List<Book> books = bookQueryRepository.findAll(categoryId, searchWord);
-
-        List<BookResponseDto> collect = books.stream()
-                .map(BookResponseDto::new)
-                .collect(Collectors.toList());
-
-        return collect;
     }
 
     @Override

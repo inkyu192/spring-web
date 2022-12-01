@@ -36,21 +36,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<CategoryResponseDto> findAll(String searchWord) {
+        List<Category> categories = categoryQueryRepository.findAll(searchWord);
+
+        return categories.stream()
+                .map(CategoryResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public CategoryResponseDto findById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
 
         return new CategoryResponseDto(category);
-    }
-
-    @Override
-    public List<CategoryResponseDto> findAll(String searchWord) {
-        List<Category> categories = categoryQueryRepository.findAll(searchWord);
-
-        List<CategoryResponseDto> collect = categories.stream()
-                .map(CategoryResponseDto::new)
-                .collect(Collectors.toList());
-
-        return collect;
     }
 
     @Override

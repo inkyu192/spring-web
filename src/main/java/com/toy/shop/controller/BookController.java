@@ -19,15 +19,8 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping
-    public Object addBook(@RequestBody @Valid BookSaveRequestDto requestDto) {
+    public Object saveBook(@RequestBody @Valid BookSaveRequestDto requestDto) {
         BookResponseDto responseDto = bookService.save(requestDto);
-
-        return new ResultDto<>(responseDto);
-    }
-
-    @GetMapping("/{id}")
-    public Object book(@PathVariable Long id) {
-        BookResponseDto responseDto = bookService.findById(id);
 
         return new ResultDto<>(responseDto);
     }
@@ -39,8 +32,15 @@ public class BookController {
         return new ResultDto<>(list);
     }
 
+    @GetMapping("/{id}")
+    public Object book(@PathVariable Long id) {
+        BookResponseDto responseDto = bookService.findById(id);
+
+        return new ResultDto<>(responseDto);
+    }
+
     @PatchMapping("{id}")
-    public Object patchBook(@PathVariable Long id, @RequestBody @Valid BookUpdateRequestDto requestDto) {
+    public Object updateBook(@PathVariable Long id, @RequestBody @Valid BookUpdateRequestDto requestDto) {
         BookResponseDto responseDto = bookService.update(id, requestDto);
 
         return new ResultDto<>(responseDto);
