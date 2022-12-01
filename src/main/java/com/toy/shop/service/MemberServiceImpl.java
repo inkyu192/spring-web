@@ -4,6 +4,8 @@ import com.toy.shop.domain.Member;
 import com.toy.shop.dto.MemberResponseDto;
 import com.toy.shop.dto.MemberSaveRequestDto;
 import com.toy.shop.dto.MemberUpdateRequestDto;
+import com.toy.shop.exception.DataNotFoundException;
+import com.toy.shop.repository.MemberQueryRepository;
 import com.toy.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,12 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+
+    private final MemberQueryRepository memberQueryRepository;
 
     @Override
     public MemberResponseDto save(MemberSaveRequestDto requestDto) {
@@ -28,22 +34,34 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponseDto findById(Long id) {
-        return null;
+    public List<MemberResponseDto> findAll(String searchWord) {
+        List<Member> members = memberQueryRepository.findAll(searchWord);
+
+        return members.stream()
+                .map(MemberResponseDto::new)
+                .toList();
     }
 
     @Override
-    public List<MemberResponseDto> findAll(String searchWord) {
-        return null;
+    public MemberResponseDto findById(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(() -> new DataNotFoundException(MEMBER_NOT_FOUND));
+
+        return new MemberResponseDto(member);
     }
 
     @Override
     public MemberResponseDto update(Long id, MemberUpdateRequestDto requestDto) {
-        return null;
+        Member member = memberRepository.findById(id).orElseThrow(() -> new DataNotFoundException(MEMBER_NOT_FOUND));
+
+        member.updateMember(requestDto);
+
+        return new MemberResponseDto(member);
     }
 
     @Override
     public void delete(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(() -> new DataNotFoundException(MEMBER_NOT_FOUND));
 
+        memberRepository.delete(member);
     }
 }

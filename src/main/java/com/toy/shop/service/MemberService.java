@@ -10,9 +10,9 @@ public interface MemberService {
 
     MemberResponseDto save(MemberSaveRequestDto requestDto);
 
-    MemberResponseDto findById(Long id);
-
     List<MemberResponseDto> findAll(String searchWord);
+
+    MemberResponseDto findById(Long id);
 
     MemberResponseDto update(Long id, MemberUpdateRequestDto requestDto);
 

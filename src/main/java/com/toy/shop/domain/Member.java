@@ -1,6 +1,7 @@
 package com.toy.shop.domain;
 
 import com.toy.shop.dto.MemberSaveRequestDto;
+import com.toy.shop.dto.MemberUpdateRequestDto;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -26,5 +27,10 @@ public class Member {
         member.address = Address.createAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
 
         return member;
+    }
+
+    public void updateMember(MemberUpdateRequestDto requestDto) {
+        this.name = requestDto.getName();
+        this.address = Address.createAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
     }
 }
