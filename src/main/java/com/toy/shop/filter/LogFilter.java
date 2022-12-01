@@ -11,7 +11,7 @@ import java.util.UUID;
 public class LogFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         log.info("======================== Filter init ========================");
     }
 
@@ -26,6 +26,7 @@ public class LogFilter implements Filter {
             log.info("======================== Filter request [{}][{}] ========================", logId, requestURI);
             chain.doFilter(request, response);
         } catch (Exception e) {
+            log.error("======================== Filter error [{}] ========================", e.getMessage(), e);
             throw e;
         } finally {
             log.info("======================== Filter response [{}][{}] ========================", logId, requestURI);
