@@ -16,10 +16,4 @@ public class ShopApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
 	}
-
-//	@Bean
-//	public AuditorAware<String> auditorProvider() {
-//		return () -> Optional.of(UUID.randomUUID().toString());
-//	}
-
 }
