@@ -27,7 +27,10 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("======================== Interceptor postHandle [{}] ========================", modelAndView);
+        String requestURI = request.getRequestURI();
+        String logId = (String) request.getAttribute(LOG_ID);
+
+        log.info("======================== Interceptor postHandle [{}][{}][{}] ========================", logId, requestURI, handler);
     }
 
     @Override
