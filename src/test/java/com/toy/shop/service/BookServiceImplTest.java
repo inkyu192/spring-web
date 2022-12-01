@@ -28,7 +28,7 @@ class BookServiceImplTest {
     BookService bookService;
 
     @PersistenceContext
-    EntityManager em;
+    EntityManager entityManager;
 
     @Test
     void save() {
@@ -36,10 +36,7 @@ class BookServiceImplTest {
         categorySaveRequestDto.setName("category1");
 
         Category saveCategory = Category.createCategory(categorySaveRequestDto);
-        em.persist(saveCategory);
-
-        em.flush();
-        em.clear();
+        entityManager.persist(saveCategory);
 
         BookSaveRequestDto bookSaveRequestDto = new BookSaveRequestDto();
         bookSaveRequestDto.setName("이것이 자바다");
@@ -52,39 +49,12 @@ class BookServiceImplTest {
 
         Long saveId = bookService.save(bookSaveRequestDto).getId();
 
-        Book findBook = em.find(Book.class, saveId);
+        entityManager.flush();
+        entityManager.clear();
+
+        Book findBook = entityManager.find(Book.class, saveId);
 
         assertThat(saveId).isEqualTo(findBook.getId());
-    }
-
-    @Test
-    void findById() {
-        CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
-        categorySaveRequestDto.setName("category1");
-
-        Category saveCategory = Category.createCategory(categorySaveRequestDto);
-
-        em.persist(saveCategory);
-
-        BookSaveRequestDto bookSaveRequestDto = new BookSaveRequestDto();
-        bookSaveRequestDto.setName("이것이 자바다");
-        bookSaveRequestDto.setDescription("자바 기본 도서");
-        bookSaveRequestDto.setPublisher("한빛미디어");
-        bookSaveRequestDto.setAuthor("신용권");
-        bookSaveRequestDto.setPrice(10000);
-        bookSaveRequestDto.setQuantity(1000);
-        bookSaveRequestDto.setCategoryId(saveCategory.getId());
-
-        Book saveBook = Book.createBook(bookSaveRequestDto, saveCategory);
-
-        em.persist(saveBook);
-
-        em.flush();
-        em.clear();
-
-        BookResponseDto bookResponseDto = bookService.findById(saveBook.getId());
-
-        Assertions.assertThat(saveBook.getId()).isEqualTo(bookResponseDto.getId());
     }
 
     @Test
@@ -94,7 +64,7 @@ class BookServiceImplTest {
 
         Category saveCategory = Category.createCategory(categorySaveRequestDto);
 
-        em.persist(saveCategory);
+        entityManager.persist(saveCategory);
 
         BookSaveRequestDto bookSaveRequestDto1 = new BookSaveRequestDto();
         bookSaveRequestDto1.setName("이것이 자바다");
@@ -107,7 +77,7 @@ class BookServiceImplTest {
 
         Book saveBook1 = Book.createBook(bookSaveRequestDto1, saveCategory);
 
-        em.persist(saveBook1);
+        entityManager.persist(saveBook1);
 
         BookSaveRequestDto bookSaveRequestDto2 = new BookSaveRequestDto();
         bookSaveRequestDto2.setName("이것이 자바다");
@@ -120,10 +90,10 @@ class BookServiceImplTest {
 
         Book saveBook2 = Book.createBook(bookSaveRequestDto2, saveCategory);
 
-        em.persist(saveBook2);
+        entityManager.persist(saveBook2);
 
-        em.flush();
-        em.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         List<BookResponseDto> list = bookService.findAll(null, null);
 
@@ -132,5 +102,35 @@ class BookServiceImplTest {
                 .toList();
 
         assertThat(collect).containsOnly(saveBook1.getId(), saveBook2.getId());
+    }
+
+    @Test
+    void findById() {
+        CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+        categorySaveRequestDto.setName("category1");
+
+        Category saveCategory = Category.createCategory(categorySaveRequestDto);
+
+        entityManager.persist(saveCategory);
+
+        BookSaveRequestDto bookSaveRequestDto = new BookSaveRequestDto();
+        bookSaveRequestDto.setName("이것이 자바다");
+        bookSaveRequestDto.setDescription("자바 기본 도서");
+        bookSaveRequestDto.setPublisher("한빛미디어");
+        bookSaveRequestDto.setAuthor("신용권");
+        bookSaveRequestDto.setPrice(10000);
+        bookSaveRequestDto.setQuantity(1000);
+        bookSaveRequestDto.setCategoryId(saveCategory.getId());
+
+        Book saveBook = Book.createBook(bookSaveRequestDto, saveCategory);
+
+        entityManager.persist(saveBook);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        BookResponseDto bookResponseDto = bookService.findById(saveBook.getId());
+
+        Assertions.assertThat(saveBook.getId()).isEqualTo(bookResponseDto.getId());
     }
 }

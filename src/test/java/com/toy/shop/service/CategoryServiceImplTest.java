@@ -25,7 +25,7 @@ class CategoryServiceImplTest {
     CategoryService categoryService;
 
     @PersistenceContext
-    EntityManager em;
+    EntityManager entityManager;
 
     @Test
     void save() {
@@ -34,28 +34,12 @@ class CategoryServiceImplTest {
 
         Long saveId = categoryService.save(requestDto).getId();
 
-        em.flush();
-        em.clear();
+        entityManager.flush();
+        entityManager.clear();
 
-        Category findCategory = em.find(Category.class, saveId);
+        Category findCategory = entityManager.find(Category.class, saveId);
 
         assertThat(saveId).isEqualTo(findCategory.getId());
-    }
-
-    @Test
-    void findById() {
-        CategorySaveRequestDto requestDto = new CategorySaveRequestDto();
-        requestDto.setName("category1");
-
-        Category saveCategory = Category.createCategory(requestDto);
-        em.persist(saveCategory);
-
-        em.flush();
-        em.clear();
-
-        CategoryResponseDto responseDto = categoryService.findById(saveCategory.getId());
-
-        assertThat(saveCategory.getId()).isEqualTo(responseDto.getId());
     }
 
     @Test
@@ -64,16 +48,18 @@ class CategoryServiceImplTest {
         requestDto1.setName("category1");
 
         Category saveCategory1 = Category.createCategory(requestDto1);
-        em.persist(saveCategory1);
+
+        entityManager.persist(saveCategory1);
 
         CategorySaveRequestDto requestDto2 = new CategorySaveRequestDto();
         requestDto2.setName("category2");
 
         Category saveCategory2 = Category.createCategory(requestDto2);
-        em.persist(saveCategory2);
 
-        em.flush();
-        em.clear();
+        entityManager.persist(saveCategory2);
+
+        entityManager.flush();
+        entityManager.clear();
 
         List<CategoryResponseDto> list = categoryService.findAll(null);
 
@@ -85,24 +71,38 @@ class CategoryServiceImplTest {
     }
 
     @Test
+    void findById() {
+        CategorySaveRequestDto requestDto = new CategorySaveRequestDto();
+        requestDto.setName("category1");
+
+        Category saveCategory = Category.createCategory(requestDto);
+        entityManager.persist(saveCategory);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        CategoryResponseDto responseDto = categoryService.findById(saveCategory.getId());
+
+        assertThat(saveCategory.getId()).isEqualTo(responseDto.getId());
+    }
+
+    @Test
     void update() {
         CategorySaveRequestDto saveRequestDto = new CategorySaveRequestDto();
         saveRequestDto.setName("category1");
 
         Category saveCategory = Category.createCategory(saveRequestDto);
-        em.persist(saveCategory);
+        entityManager.persist(saveCategory);
 
-        em.flush();
-        em.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         CategoryUpdateRequestDto updateRequestDto = new CategoryUpdateRequestDto();
         updateRequestDto.setName("category2");
 
-        categoryService.update(saveCategory.getId(), updateRequestDto);
+        CategoryResponseDto responseDto = categoryService.update(saveCategory.getId(), updateRequestDto);
 
-        Category category = em.find(Category.class, saveCategory.getId());
-
-        assertThat(updateRequestDto.getName()).isEqualTo(category.getName());
+        assertThat(updateRequestDto.getName()).isEqualTo(responseDto.getName());
     }
 
     @Test
@@ -111,14 +111,14 @@ class CategoryServiceImplTest {
         saveRequestDto.setName("category1");
 
         Category saveCategory = Category.createCategory(saveRequestDto);
-        em.persist(saveCategory);
+        entityManager.persist(saveCategory);
 
-        em.flush();
-        em.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         categoryService.delete(saveCategory.getId());
 
-        Category category = em.find(Category.class, saveCategory.getId());
+        Category category = entityManager.find(Category.class, saveCategory.getId());
 
         assertThat(category).isNull();
     }
