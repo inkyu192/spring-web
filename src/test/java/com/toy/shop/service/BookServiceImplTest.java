@@ -4,6 +4,7 @@ import com.toy.shop.domain.Book;
 import com.toy.shop.domain.Category;
 import com.toy.shop.dto.BookResponseDto;
 import com.toy.shop.dto.BookSaveRequestDto;
+import com.toy.shop.dto.BookUpdateRequestDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -132,5 +133,44 @@ class BookServiceImplTest {
         BookResponseDto bookResponseDto = bookService.findById(saveBook.getId());
 
         Assertions.assertThat(saveBook.getId()).isEqualTo(bookResponseDto.getId());
+    }
+
+    @Test
+    void update() {
+        CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+        categorySaveRequestDto.setName("category1");
+
+        Category saveCategory = Category.createCategory(categorySaveRequestDto);
+
+        entityManager.persist(saveCategory);
+
+        BookSaveRequestDto bookSaveRequestDto = new BookSaveRequestDto();
+        bookSaveRequestDto.setName("이것이 자바다");
+        bookSaveRequestDto.setDescription("자바 기본 도서");
+        bookSaveRequestDto.setPublisher("한빛미디어");
+        bookSaveRequestDto.setAuthor("신용권");
+        bookSaveRequestDto.setPrice(10000);
+        bookSaveRequestDto.setQuantity(1000);
+        bookSaveRequestDto.setCategoryId(saveCategory.getId());
+
+        Book saveBook = Book.createBook(bookSaveRequestDto, saveCategory);
+
+        entityManager.persist(saveBook);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        BookUpdateRequestDto bookUpdateRequestDto = new BookUpdateRequestDto();
+        bookUpdateRequestDto.setName("이것이 자바다 개정판");
+        bookUpdateRequestDto.setDescription("자바 기본 도서");
+        bookUpdateRequestDto.setPublisher("한빛미디어");
+        bookUpdateRequestDto.setAuthor("신용권");
+        bookUpdateRequestDto.setPrice(10000);
+        bookUpdateRequestDto.setQuantity(1000);
+        bookUpdateRequestDto.setCategoryId(saveCategory.getId());
+
+        BookResponseDto responseDto = bookService.update(saveBook.getId(), bookUpdateRequestDto);
+
+        assertThat(bookUpdateRequestDto.getName()).isEqualTo(responseDto.getName());
     }
 }
