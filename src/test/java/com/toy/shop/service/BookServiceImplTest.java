@@ -173,4 +173,36 @@ class BookServiceImplTest {
 
         assertThat(bookUpdateRequestDto.getName()).isEqualTo(responseDto.getName());
     }
+
+    @Test
+    void delete() {
+        CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+        categorySaveRequestDto.setName("category1");
+
+        Category saveCategory = Category.createCategory(categorySaveRequestDto);
+
+        entityManager.persist(saveCategory);
+
+        BookSaveRequestDto bookSaveRequestDto = new BookSaveRequestDto();
+        bookSaveRequestDto.setName("이것이 자바다");
+        bookSaveRequestDto.setDescription("자바 기본 도서");
+        bookSaveRequestDto.setPublisher("한빛미디어");
+        bookSaveRequestDto.setAuthor("신용권");
+        bookSaveRequestDto.setPrice(10000);
+        bookSaveRequestDto.setQuantity(1000);
+        bookSaveRequestDto.setCategoryId(saveCategory.getId());
+
+        Book saveBook = Book.createBook(bookSaveRequestDto, saveCategory);
+
+        entityManager.persist(saveBook);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        bookService.delete(saveBook.getId());
+
+        Book book = entityManager.find(Book.class, saveBook.getId());
+
+        assertThat(book).isNull();
+    }
 }
