@@ -162,16 +162,11 @@ class BookServiceImplTest {
 
         BookUpdateRequestDto bookUpdateRequestDto = new BookUpdateRequestDto();
         bookUpdateRequestDto.setName("이것이 자바다 개정판");
-        bookUpdateRequestDto.setDescription("자바 기본 도서");
-        bookUpdateRequestDto.setPublisher("한빛미디어");
-        bookUpdateRequestDto.setAuthor("신용권");
-        bookUpdateRequestDto.setPrice(10000);
-        bookUpdateRequestDto.setQuantity(1000);
-        bookUpdateRequestDto.setCategoryId(saveCategory.getId());
 
         BookResponseDto responseDto = bookService.update(saveBook.getId(), bookUpdateRequestDto);
 
         assertThat(bookUpdateRequestDto.getName()).isEqualTo(responseDto.getName());
+        assertThat(bookSaveRequestDto.getDescription()).isEqualTo(responseDto.getDescription());
     }
 
     @Test

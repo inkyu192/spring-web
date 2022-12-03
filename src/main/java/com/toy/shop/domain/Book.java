@@ -3,6 +3,7 @@ package com.toy.shop.domain;
 import com.toy.shop.dto.BookSaveRequestDto;
 import com.toy.shop.dto.BookUpdateRequestDto;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 
@@ -41,12 +42,12 @@ public class Book extends BaseTimeDomain {
     }
 
     public void updateBook(BookUpdateRequestDto requestDto, Category category) {
-        this.name = requestDto.getName();
-        this.description = requestDto.getDescription();
-        this.author = requestDto.getAuthor();
-        this.publisher = requestDto.getPublisher();
-        this.price = requestDto.getPrice();
-        this.quantity = requestDto.getQuantity();
-        this.category = category;
+        if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
+        if (StringUtils.hasText(requestDto.getDescription())) this.description = requestDto.getDescription();
+        if (StringUtils.hasText(requestDto.getAuthor())) this.author = requestDto.getAuthor();
+        if (StringUtils.hasText(requestDto.getPublisher())) this.publisher = requestDto.getPublisher();
+        if (requestDto.getPrice() != null) this.price = requestDto.getPrice();
+        if (requestDto.getQuantity() != null) this.quantity = requestDto.getQuantity();
+        if (category != null) this.category = category;
     }
 }
