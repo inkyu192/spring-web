@@ -8,6 +8,5 @@ import javax.validation.constraints.NotEmpty;
 @Getter @Setter
 public class CategoryUpdateRequestDto {
 
-    @NotEmpty
     private String name;
 }

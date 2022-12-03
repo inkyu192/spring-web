@@ -3,6 +3,7 @@ package com.toy.shop.domain;
 import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,6 +30,6 @@ public class Category {
     }
 
     public void updateCategory(CategoryUpdateRequestDto requestDto) {
-        this.name = requestDto.getName();
+        if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
     }
 }
