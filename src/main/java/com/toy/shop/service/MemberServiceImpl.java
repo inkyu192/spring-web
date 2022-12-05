@@ -60,6 +60,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void delete(Long id) {
-        memberRepository.deleteById(id);
+        Member member = memberRepository.findById(id).orElseThrow(() -> new DataNotFoundException(MEMBER_NOT_FOUND));
+
+        memberRepository.delete(member);
     }
 }
