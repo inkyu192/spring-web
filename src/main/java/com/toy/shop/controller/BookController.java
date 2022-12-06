@@ -5,10 +5,10 @@ import com.toy.shop.dto.BookResponseDto;
 import com.toy.shop.dto.BookSaveRequestDto;
 import com.toy.shop.dto.BookUpdateRequestDto;
 import com.toy.shop.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

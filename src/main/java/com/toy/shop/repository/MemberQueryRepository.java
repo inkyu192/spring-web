@@ -3,20 +3,26 @@ package com.toy.shop.repository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Member;
+import com.toy.shop.domain.QMember;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.toy.shop.domain.QMember.member;
+import static com.toy.shop.domain.QMember.*;
+
 
 @Repository
 public class MemberQueryRepository {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private final JPAQueryFactory queryFactory;
 
-    public MemberQueryRepository(EntityManager entityManager) {
+    public MemberQueryRepository() {
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 

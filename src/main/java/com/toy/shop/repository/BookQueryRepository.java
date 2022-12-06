@@ -3,10 +3,11 @@ package com.toy.shop.repository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Book;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.toy.shop.domain.QBook.book;
@@ -14,9 +15,12 @@ import static com.toy.shop.domain.QBook.book;
 @Repository
 public class BookQueryRepository {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private final JPAQueryFactory queryFactory;
 
-    public BookQueryRepository(EntityManager entityManager) {
+    public BookQueryRepository() {
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 

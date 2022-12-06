@@ -2,10 +2,10 @@ package com.toy.shop.domain;
 
 import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
+import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

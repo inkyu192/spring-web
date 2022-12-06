@@ -1,9 +1,9 @@
 package com.toy.shop.service;
 
+import com.toy.shop.domain.Category;
 import com.toy.shop.dto.CategoryResponseDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
-import com.toy.shop.domain.Category;
 import com.toy.shop.exception.DataNotFoundException;
 import com.toy.shop.repository.CategoryQueryRepository;
 import com.toy.shop.repository.CategoryRepository;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.toy.shop.common.ResultCode.*;
+import static com.toy.shop.common.ResultCode.CATEGORY_NOT_FOUND;
 
 @Service
 @Transactional

@@ -1,8 +1,8 @@
 package com.toy.shop.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

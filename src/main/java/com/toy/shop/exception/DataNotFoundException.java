@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class DataNotFoundException extends RuntimeException {
 
-    private ResultCode resultCode;
+    private final ResultCode resultCode;
 
     public DataNotFoundException(ResultCode resultCode) {
         this.resultCode = resultCode;

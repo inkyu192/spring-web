@@ -6,6 +6,8 @@ import com.toy.shop.dto.BookResponseDto;
 import com.toy.shop.dto.BookSaveRequestDto;
 import com.toy.shop.dto.BookUpdateRequestDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import java.util.List;
 

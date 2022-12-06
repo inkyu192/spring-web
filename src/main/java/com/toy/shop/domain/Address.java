@@ -1,9 +1,7 @@
 package com.toy.shop.domain;
 
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter

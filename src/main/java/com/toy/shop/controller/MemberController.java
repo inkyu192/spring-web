@@ -5,10 +5,10 @@ import com.toy.shop.dto.MemberResponseDto;
 import com.toy.shop.dto.MemberSaveRequestDto;
 import com.toy.shop.dto.MemberUpdateRequestDto;
 import com.toy.shop.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

@@ -2,9 +2,8 @@ package com.toy.shop.domain;
 
 import com.toy.shop.dto.MemberSaveRequestDto;
 import com.toy.shop.dto.MemberUpdateRequestDto;
+import jakarta.persistence.*;
 import lombok.Getter;
-
-import javax.persistence.*;
 
 @Entity
 @Getter

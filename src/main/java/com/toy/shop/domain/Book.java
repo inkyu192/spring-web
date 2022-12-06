@@ -2,10 +2,9 @@ package com.toy.shop.domain;
 
 import com.toy.shop.dto.BookSaveRequestDto;
 import com.toy.shop.dto.BookUpdateRequestDto;
+import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
-
-import javax.persistence.*;
 
 @Entity
 @Getter

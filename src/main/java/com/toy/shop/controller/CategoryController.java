@@ -5,10 +5,10 @@ import com.toy.shop.dto.CategoryResponseDto;
 import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
 import com.toy.shop.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
