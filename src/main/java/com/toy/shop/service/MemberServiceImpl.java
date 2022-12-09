@@ -5,6 +5,7 @@ import com.toy.shop.dto.MemberResponseDto;
 import com.toy.shop.dto.MemberSaveRequestDto;
 import com.toy.shop.dto.MemberUpdateRequestDto;
 import com.toy.shop.exception.DataNotFoundException;
+import com.toy.shop.repository.MemberCustomRepository;
 import com.toy.shop.repository.MemberQueryRepository;
 import com.toy.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 
-    private final MemberQueryRepository memberQueryRepository;
+    private final MemberCustomRepository memberCustomRepository;
 
     @Override
     public MemberResponseDto save(MemberSaveRequestDto requestDto) {
@@ -35,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberResponseDto> findAll(String searchWord) {
-        List<Member> members = memberQueryRepository.findAll(searchWord);
+        List<Member> members = memberCustomRepository.findAll(searchWord);
 
         return members.stream()
                 .map(MemberResponseDto::new)

@@ -3,29 +3,30 @@ package com.toy.shop.repository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Member;
-import com.toy.shop.domain.QMember;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static com.toy.shop.domain.QMember.*;
+import static com.toy.shop.domain.QMember.member;
 
 
+@Primary
 @Repository
-public class MemberQueryRepository {
+public class MemberQueryRepository implements MemberCustomRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     private final JPAQueryFactory queryFactory;
 
-    public MemberQueryRepository() {
+    public MemberQueryRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
+    @Override
     public List<Member> findAll(String searchWord) {
         return queryFactory.select(member)
                 .from(member)
