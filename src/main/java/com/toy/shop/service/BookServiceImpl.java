@@ -6,7 +6,7 @@ import com.toy.shop.dto.BookResponseDto;
 import com.toy.shop.dto.BookSaveRequestDto;
 import com.toy.shop.dto.BookUpdateRequestDto;
 import com.toy.shop.exception.DataNotFoundException;
-import com.toy.shop.repository.BookQueryRepository;
+import com.toy.shop.repository.BookCustomRepository;
 import com.toy.shop.repository.BookRepository;
 import com.toy.shop.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    private final BookQueryRepository bookQueryRepository;
+    private final BookCustomRepository bookCustomRepository;
 
     private final CategoryRepository categoryRepository;
 
@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookResponseDto> findAll(Long categoryId, String searchWord) {
-        List<Book> books = bookQueryRepository.findAll(categoryId, searchWord);
+        List<Book> books = bookCustomRepository.findAll(categoryId, searchWord);
 
         return books.stream()
                 .map(BookResponseDto::new)

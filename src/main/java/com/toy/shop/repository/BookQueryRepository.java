@@ -4,7 +4,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Book;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -12,18 +12,20 @@ import java.util.List;
 
 import static com.toy.shop.domain.QBook.book;
 
+@Primary
 @Repository
-public class BookQueryRepository {
+public class BookQueryRepository implements BookCustomRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     private final JPAQueryFactory queryFactory;
 
-    public BookQueryRepository() {
+    public BookQueryRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
+    @Override
     public List<Book> findAll(Long categoryId, String searchWord) {
         return queryFactory.select(book)
                 .from(book)
