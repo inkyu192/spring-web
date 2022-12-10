@@ -5,9 +5,9 @@ import com.toy.shop.dto.MemberResponseDto;
 import com.toy.shop.dto.MemberSaveRequestDto;
 import com.toy.shop.dto.MemberUpdateRequestDto;
 import com.toy.shop.exception.DataNotFoundException;
-import com.toy.shop.repository.MemberCustomRepository;
+import com.toy.shop.repository.MemberJpaRepository;
 import com.toy.shop.repository.MemberQueryRepository;
-import com.toy.shop.repository.MemberRepository;
+import com.toy.shop.repository.MemberSpringJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +21,11 @@ import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository;
+//    private final MemberJpaRepository memberRepository;
 
-    private final MemberCustomRepository memberCustomRepository;
+    private final MemberSpringJpaRepository memberRepository;
+
+    private final MemberQueryRepository memberQueryRepository;
 
     @Override
     public MemberResponseDto save(MemberSaveRequestDto requestDto) {
@@ -36,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberResponseDto> findAll(String searchWord) {
-        List<Member> members = memberCustomRepository.findAll(searchWord);
+        List<Member> members = memberQueryRepository.findAll(searchWord);
 
         return members.stream()
                 .map(MemberResponseDto::new)

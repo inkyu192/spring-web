@@ -9,14 +9,19 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemberJpaRepository implements MemberCustomRepository {
+public class MemberJpaRepository {
 
     private final EntityManager entityManager;
 
-    @Override
+    public Member save(Member member) {
+        entityManager.persist(member);
+        return member;
+    }
+
     public List<Member> findAll(String searchWord) {
         String jpql = "select m from Member m";
         ArrayList<String> whereCondition = new ArrayList<>();
@@ -37,5 +42,13 @@ public class MemberJpaRepository implements MemberCustomRepository {
         }
 
         return query.getResultList();
+    }
+
+    public Optional<Member> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Member.class, id));
+    }
+
+    public void delete(Member member) {
+        entityManager.remove(member);
     }
 }

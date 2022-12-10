@@ -4,7 +4,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Member;
 import jakarta.persistence.EntityManager;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -13,9 +12,8 @@ import java.util.List;
 import static com.toy.shop.domain.QMember.member;
 
 
-@Primary
 @Repository
-public class MemberQueryRepository implements MemberCustomRepository {
+public class MemberQueryRepository {
 
     private final EntityManager entityManager;
 
@@ -26,7 +24,6 @@ public class MemberQueryRepository implements MemberCustomRepository {
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
-    @Override
     public List<Member> findAll(String searchWord) {
         return queryFactory.select(member)
                 .from(member)
