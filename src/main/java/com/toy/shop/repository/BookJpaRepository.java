@@ -9,14 +9,19 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class BookJpaRepository implements BookCustomRepository {
+public class BookJpaRepository {
 
     private final EntityManager entityManager;
 
-    @Override
+    public Book save(Book book) {
+        entityManager.persist(book);
+        return book;
+    }
+
     public List<Book> findAll(Long categoryId, String searchWord) {
         String jpql = "select b from Book b";
         ArrayList<String> whereCondition = new ArrayList<>();
@@ -45,5 +50,13 @@ public class BookJpaRepository implements BookCustomRepository {
         }
 
         return query.getResultList();
+    }
+
+    public Optional<Book> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Book.class, id));
+    }
+
+    public void delete(Book book) {
+        entityManager.remove(book);
     }
 }
