@@ -6,7 +6,6 @@ import com.toy.shop.dto.CategorySaveRequestDto;
 import com.toy.shop.dto.CategoryUpdateRequestDto;
 import com.toy.shop.exception.DataNotFoundException;
 import com.toy.shop.repository.CategoryJpaRepository;
-import com.toy.shop.repository.CategoryQueryRepository;
 import com.toy.shop.repository.CategorySpringJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,9 @@ import static com.toy.shop.common.ResultCode.CATEGORY_NOT_FOUND;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-//    private final CategoryJpaRepository categoryRepository;
+    private final CategoryJpaRepository categoryRepository;
 
-    private final CategorySpringJpaRepository categoryRepository;
-
-    private final CategoryQueryRepository categoryQueryRepository;
+//    private final CategorySpringJpaRepository categoryRepository;
 
     @Override
 
@@ -40,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResponseDto> findAll(String searchWord) {
-        List<Category> categories = categoryQueryRepository.findAll(searchWord);
+        List<Category> categories = categoryRepository.findAll(searchWord);
 
         return categories.stream()
                 .map(CategoryResponseDto::new)
