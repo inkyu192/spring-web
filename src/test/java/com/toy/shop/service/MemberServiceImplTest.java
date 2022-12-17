@@ -78,4 +78,24 @@ class MemberServiceImplTest {
 
         assertThat(collect).containsOnly(saveMember1.getId(), saveMember2.getId());
     }
+
+    @Test
+    void findById() {
+        MemberSaveRequestDto requestDto = new MemberSaveRequestDto();
+        requestDto.setName("박인규");
+        requestDto.setCity("화성");
+        requestDto.setStreet("순환대로");
+        requestDto.setZipcode("000");
+
+        Member saveMember = Member.createMember(requestDto);
+
+        entityManager.persist(saveMember);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        MemberResponseDto responseDto = memberService.findById(saveMember.getId());
+
+        assertThat(saveMember.getId()).isEqualTo(responseDto.getId());
+    }
 }
