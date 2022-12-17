@@ -122,4 +122,26 @@ class MemberServiceImplTest {
 
         assertThat(updateRequestDto.getCity()).isEqualTo(responseDto.getCity());
     }
+
+    @Test
+    void delete() {
+        MemberSaveRequestDto saveRequestDto = new MemberSaveRequestDto();
+        saveRequestDto.setName("박인규");
+        saveRequestDto.setCity("화성");
+        saveRequestDto.setStreet("순환대로");
+        saveRequestDto.setZipcode("000");
+
+        Member saveMember = Member.createMember(saveRequestDto);
+
+        entityManager.persist(saveMember);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        memberService.delete(saveMember.getId());
+
+        Member member = entityManager.find(Member.class, saveMember.getId());
+
+        assertThat(member).isNull();
+    }
 }
