@@ -4,6 +4,7 @@ import com.toy.shop.dto.MemberSaveRequestDto;
 import com.toy.shop.dto.MemberUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Getter
@@ -29,7 +30,7 @@ public class Member {
     }
 
     public void updateMember(MemberUpdateRequestDto requestDto) {
-        this.name = requestDto.getName();
+        if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
         this.address = Address.createAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
     }
 }

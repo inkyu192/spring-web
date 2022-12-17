@@ -2,9 +2,10 @@ package com.toy.shop.domain;
 
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
-@Embeddable
 @Getter
+@Embeddable
 public class Address {
 
     private String city;
@@ -14,9 +15,9 @@ public class Address {
     public static Address createAddress(String city, String street, String zipcode) {
         Address address = new Address();
 
-        address.city = city;
-        address.street = street;
-        address.zipcode = zipcode;
+        if (StringUtils.hasText(city)) address.city = city;
+        if (StringUtils.hasText(street)) address.street = street;
+        if (StringUtils.hasText(zipcode)) address.zipcode = zipcode;
 
         return address;
     }

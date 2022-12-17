@@ -3,6 +3,7 @@ package com.toy.shop.service;
 import com.toy.shop.domain.Member;
 import com.toy.shop.dto.MemberResponseDto;
 import com.toy.shop.dto.MemberSaveRequestDto;
+import com.toy.shop.dto.MemberUpdateRequestDto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
@@ -97,5 +98,28 @@ class MemberServiceImplTest {
         MemberResponseDto responseDto = memberService.findById(saveMember.getId());
 
         assertThat(saveMember.getId()).isEqualTo(responseDto.getId());
+    }
+
+    @Test
+    void update() {
+        MemberSaveRequestDto saveRequestDto = new MemberSaveRequestDto();
+        saveRequestDto.setName("박인규");
+        saveRequestDto.setCity("화성");
+        saveRequestDto.setStreet("순환대로");
+        saveRequestDto.setZipcode("000");
+
+        Member saveMember = Member.createMember(saveRequestDto);
+
+        entityManager.persist(saveMember);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        MemberUpdateRequestDto updateRequestDto = new MemberUpdateRequestDto();
+        updateRequestDto.setCity("수원");
+
+        MemberResponseDto responseDto = memberService.update(saveMember.getId(), updateRequestDto);
+
+        assertThat(updateRequestDto.getCity()).isEqualTo(responseDto.getCity());
     }
 }
