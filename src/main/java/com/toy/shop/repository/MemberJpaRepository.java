@@ -18,8 +18,12 @@ public class MemberJpaRepository {
     private final EntityManager entityManager;
 
     public Member save(Member member) {
-        entityManager.persist(member);
-        return member;
+        if (member.getId() == null) {
+            entityManager.persist(member);
+            return member;
+        } else {
+            return entityManager.merge(member);
+        }
     }
 
     public List<Member> findAll(String searchWord) {

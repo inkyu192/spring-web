@@ -18,8 +18,12 @@ public class BookJpaRepository {
     private final EntityManager entityManager;
 
     public Book save(Book book) {
-        entityManager.persist(book);
-        return book;
+        if (book.getId() == null) {
+            entityManager.persist(book);
+            return book;
+        } else {
+            return entityManager.merge(book);
+        }
     }
 
     public List<Book> findAll(Long categoryId, String searchWord) {

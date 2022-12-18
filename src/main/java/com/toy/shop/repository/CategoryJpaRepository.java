@@ -18,8 +18,12 @@ public class CategoryJpaRepository {
     private final EntityManager entityManager;
 
     public Category save(Category category) {
-        entityManager.persist(category);
-        return category;
+        if (category.getId() == null) {
+            entityManager.persist(category);
+            return category;
+        } else {
+            return entityManager.merge(category);
+        }
     }
 
     public List<Category> findAll(String searchWord) {
