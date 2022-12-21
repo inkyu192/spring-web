@@ -1,6 +1,6 @@
 package com.toy.shop.repository;
 
-import com.toy.shop.domain.Book;
+import com.toy.shop.domain.Item;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
@@ -13,21 +13,21 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class BookJpaRepository {
+public class ItemJpaRepository {
 
     private final EntityManager entityManager;
 
-    public Book save(Book book) {
-        if (book.getId() == null) {
-            entityManager.persist(book);
-            return book;
+    public Item save(Item item) {
+        if (item.getId() == null) {
+            entityManager.persist(item);
+            return item;
         } else {
-            return entityManager.merge(book);
+            return entityManager.merge(item);
         }
     }
 
-    public List<Book> findAll(Long categoryId, String searchWord) {
-        String jpql = "select b from Book b";
+    public List<Item> findAll(Long categoryId, String searchWord) {
+        String jpql = "select b from Item b";
         ArrayList<String> whereCondition = new ArrayList<>();
 
         if (categoryId != null) {
@@ -43,7 +43,7 @@ public class BookJpaRepository {
             jpql += String.join(" and ", whereCondition);
         }
 
-        TypedQuery<Book> query = entityManager.createQuery(jpql, Book.class);
+        TypedQuery<Item> query = entityManager.createQuery(jpql, Item.class);
 
         if (categoryId != null) {
             query.setParameter("categoryId", categoryId);
@@ -56,11 +56,11 @@ public class BookJpaRepository {
         return query.getResultList();
     }
 
-    public Optional<Book> findById(Long id) {
-        return Optional.ofNullable(entityManager.find(Book.class, id));
+    public Optional<Item> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Item.class, id));
     }
 
-    public void delete(Book book) {
-        entityManager.remove(book);
+    public void delete(Item item) {
+        entityManager.remove(item);
     }
 }

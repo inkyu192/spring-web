@@ -8,19 +8,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class BookSaveRequestDto {
+public class ItemSaveRequestDto {
 
     @NotEmpty
     private String name;
 
     @NotEmpty
     private String description;
-
-    @NotEmpty
-    private String publisher;
-
-    @NotEmpty
-    private String author;
 
     @NotNull
     @Min(100)

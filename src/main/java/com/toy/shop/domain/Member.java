@@ -8,10 +8,9 @@ import org.springframework.util.StringUtils;
 
 @Entity
 @Getter
-public class Member {
+public class Member extends BaseDomain {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
 

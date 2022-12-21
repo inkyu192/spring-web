@@ -11,16 +11,15 @@ import java.util.List;
 
 @Entity
 @Getter
-public class Category {
+public class Category extends BaseDomain {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "category_id")
     private Long id;
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<Book> books = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     public static Category createCategory(CategorySaveRequestDto requestDto) {
         Category category = new Category();

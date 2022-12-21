@@ -6,15 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class BookUpdateRequestDto {
+public class ItemUpdateRequestDto {
 
     private String name;
 
     private String description;
-
-    private String publisher;
-
-    private String author;
 
     @Min(100)
     private Integer price;
