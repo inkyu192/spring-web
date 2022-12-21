@@ -21,19 +21,18 @@ import static com.toy.shop.common.ResultCode.BOOK_NOT_FOUND;
 import static com.toy.shop.common.ResultCode.CATEGORY_NOT_FOUND;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
     private final BookJpaRepository bookRepository;
-
 //    private final BookSpringJpaRepository bookRepository;
 
     private final CategoryJpaRepository categoryRepository;
-
 //    private final CategorySpringJpaRepository categoryRepository;
 
     @Override
+    @Transactional
     public BookResponseDto save(BookSaveRequestDto requestDto) {
         Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
 
@@ -61,6 +60,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public BookResponseDto update(Long id, BookUpdateRequestDto requestDto) {
         Category category = null;
         Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
@@ -75,6 +75,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BOOK_NOT_FOUND));
 

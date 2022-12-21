@@ -16,15 +16,15 @@ import java.util.List;
 import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberJpaRepository memberRepository;
-
 //    private final MemberSpringJpaRepository memberRepository;
 
     @Override
+    @Transactional
     public MemberResponseDto save(MemberSaveRequestDto requestDto) {
         Member member = Member.createMember(requestDto);
 
@@ -50,6 +50,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public MemberResponseDto update(Long id, MemberUpdateRequestDto requestDto) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new DataNotFoundException(MEMBER_NOT_FOUND));
 
@@ -59,6 +60,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new DataNotFoundException(MEMBER_NOT_FOUND));
 

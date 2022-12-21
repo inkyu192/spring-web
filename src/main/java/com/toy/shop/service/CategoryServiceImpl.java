@@ -17,16 +17,15 @@ import java.util.stream.Collectors;
 import static com.toy.shop.common.ResultCode.CATEGORY_NOT_FOUND;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryJpaRepository categoryRepository;
-
 //    private final CategorySpringJpaRepository categoryRepository;
 
     @Override
-
+    @Transactional
     public CategoryResponseDto save(CategorySaveRequestDto requestDto) {
         Category category = Category.createCategory(requestDto);
 
@@ -52,6 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryResponseDto update(Long id, CategoryUpdateRequestDto requestDto) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
 
@@ -61,6 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CATEGORY_NOT_FOUND));
 
