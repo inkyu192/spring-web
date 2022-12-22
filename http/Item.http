@@ -1,0 +1,33 @@
+### saveItem
+POST localhost:8080/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "아이템명",
+  "description": "아이템 설명",
+  "price": 10000,
+  "quantity": 10,
+  "categoryId": 1
+}
+
+### items
+GET localhost:8080/items
+Accept: application/json
+
+### item
+GET localhost:8080/items/1
+Accept: application/json
+
+### updateItem
+PATCH localhost:8080/items/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "price": 5000
+}
+
+### deleteItem
+DELETE localhost:8080/items/1
+Accept: application/json
