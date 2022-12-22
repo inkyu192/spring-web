@@ -1,0 +1,29 @@
+### saveCategory
+POST localhost:8080/categories
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "카테고리444"
+}
+
+### categories
+GET localhost:8080/categories
+Accept: application/json
+
+### category
+GET localhost:8080/categories/1
+Accept: application/json
+
+### updateCategory
+PATCH localhost:8080/categories/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "카테고리1111111111111111111111"
+}
+
+### deleteCategory
+DELETE localhost:8080/categories/1
+Accept: application/json
