@@ -1,0 +1,32 @@
+### saveMember
+POST localhost:8080/members
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "박인규",
+  "city": "동탄",
+  "street": "동탄순환대로",
+  "zipcode": "00001"
+}
+
+### members
+GET localhost:8080/members
+Accept: application/json
+
+### member
+GET localhost:8080/members/1
+Accept: application/json
+
+### updateMember
+PATCH localhost:8080/members/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "박인규111111"
+}
+
+### deleteMember
+DELETE localhost:8080/members/1
+Accept: application/json
