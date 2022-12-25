@@ -1,6 +1,5 @@
 package com.toy.shop.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -17,11 +16,20 @@ public class OrderItem extends BaseDomain {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private int orderPrice;
+    private int price;
     private int count;
+
+    public static OrderItem createOrderItem(Item item, int count) {
+        OrderItem orderItem = new OrderItem();
+
+        orderItem.item = item;
+        orderItem.price = item.getPrice();
+        orderItem.count = count;
+
+        return orderItem;
+    }
 }
