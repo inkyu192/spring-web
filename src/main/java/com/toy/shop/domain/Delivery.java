@@ -1,6 +1,5 @@
 package com.toy.shop.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -12,7 +11,6 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 
@@ -21,4 +19,13 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
+
+    public static Delivery createDelivery(Member member) {
+        Delivery delivery = new Delivery();
+
+        delivery.address = Address.createAddress(member.getAddress().getCity(), member.getAddress().getStreet(), member.getAddress().getZipcode());
+        delivery.status = DeliveryStatus.READY;
+
+        return delivery;
+    }
 }
