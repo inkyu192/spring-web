@@ -7,4 +7,6 @@ import lombok.Setter;
 public class CategoryUpdateRequestDto {
 
     private String name;
+
+    private String description;
 }

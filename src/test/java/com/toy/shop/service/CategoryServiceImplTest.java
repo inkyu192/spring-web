@@ -31,6 +31,7 @@ class CategoryServiceImplTest {
     void save() {
         CategorySaveRequestDto requestDto = new CategorySaveRequestDto();
         requestDto.setName("category1");
+        requestDto.setDescription("카테고리 설명");
 
         Long saveId = categoryService.save(requestDto).getId();
 
@@ -46,6 +47,7 @@ class CategoryServiceImplTest {
     void findAll() {
         CategorySaveRequestDto requestDto1 = new CategorySaveRequestDto();
         requestDto1.setName("category1");
+        requestDto1.setDescription("카테고리1 설명");
 
         Category saveCategory1 = Category.createCategory(requestDto1);
 
@@ -53,6 +55,7 @@ class CategoryServiceImplTest {
 
         CategorySaveRequestDto requestDto2 = new CategorySaveRequestDto();
         requestDto2.setName("category2");
+        requestDto1.setDescription("카테고리2 설명");
 
         Category saveCategory2 = Category.createCategory(requestDto2);
 
@@ -74,6 +77,7 @@ class CategoryServiceImplTest {
     void findById() {
         CategorySaveRequestDto requestDto = new CategorySaveRequestDto();
         requestDto.setName("category1");
+        requestDto.setDescription("카테고리 설명");
 
         Category saveCategory = Category.createCategory(requestDto);
         entityManager.persist(saveCategory);
@@ -90,6 +94,7 @@ class CategoryServiceImplTest {
     void update() {
         CategorySaveRequestDto saveRequestDto = new CategorySaveRequestDto();
         saveRequestDto.setName("category1");
+        saveRequestDto.setDescription("카테고리 설명");
 
         Category saveCategory = Category.createCategory(saveRequestDto);
         entityManager.persist(saveCategory);
@@ -109,6 +114,7 @@ class CategoryServiceImplTest {
     void delete() {
         CategorySaveRequestDto saveRequestDto = new CategorySaveRequestDto();
         saveRequestDto.setName("category1");
+        saveRequestDto.setDescription("카테고리 설명");
 
         Category saveCategory = Category.createCategory(saveRequestDto);
         entityManager.persist(saveCategory);

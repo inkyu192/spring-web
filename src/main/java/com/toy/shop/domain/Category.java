@@ -18,12 +18,15 @@ public class Category extends BaseDomain {
     private Long id;
     private String name;
 
+    private String description;
+
     @OneToMany(mappedBy = "category")
     private List<Item> items = new ArrayList<>();
 
     public static Category createCategory(CategorySaveRequestDto requestDto) {
         Category category = new Category();
         category.name = requestDto.getName();
+        category.description = requestDto.getDescription();
 
         return category;
     }

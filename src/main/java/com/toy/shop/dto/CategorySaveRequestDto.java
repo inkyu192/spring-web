@@ -9,4 +9,7 @@ public class CategorySaveRequestDto {
 
     @NotEmpty
     private String name;
+
+    @NotEmpty
+    private String description;
 }

@@ -30,6 +30,6 @@ public class Member extends BaseDomain {
 
     public void updateMember(MemberUpdateRequestDto requestDto) {
         if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
-        this.address = Address.createAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
+        this.address.updateAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
     }
 }
