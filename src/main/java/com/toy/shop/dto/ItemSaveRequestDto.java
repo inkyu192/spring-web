@@ -18,11 +18,11 @@ public class ItemSaveRequestDto {
 
     @NotNull
     @Min(100)
-    private Integer price;
+    private int price;
 
     @NotNull
     @Max(value = 9999)
-    private Integer quantity;
+    private int quantity;
 
     @NotNull
     private Long categoryId;

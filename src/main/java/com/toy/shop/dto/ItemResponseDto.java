@@ -9,8 +9,8 @@ public class ItemResponseDto {
     private Long id;
     private String name;
     private String description;
-    private Integer price;
-    private Integer quantity;
+    private int price;
+    private int quantity;
     private Long categoryId;
 
     public ItemResponseDto(Item item) {
