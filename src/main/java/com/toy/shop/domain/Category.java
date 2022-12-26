@@ -1,13 +1,14 @@
 package com.toy.shop.domain;
 
-import com.toy.shop.dto.CategorySaveRequestDto;
-import com.toy.shop.dto.CategoryUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.toy.shop.dto.CategoryDto.SaveRequest;
+import static com.toy.shop.dto.CategoryDto.UpdateRequest;
 
 @Entity
 @Getter
@@ -23,7 +24,7 @@ public class Category extends BaseDomain {
     @OneToMany(mappedBy = "category")
     private List<Item> items = new ArrayList<>();
 
-    public static Category createCategory(CategorySaveRequestDto requestDto) {
+    public static Category createCategory(SaveRequest requestDto) {
         Category category = new Category();
         category.name = requestDto.getName();
         category.description = requestDto.getDescription();
@@ -31,7 +32,7 @@ public class Category extends BaseDomain {
         return category;
     }
 
-    public void updateCategory(CategoryUpdateRequestDto requestDto) {
+    public void updateCategory(UpdateRequest requestDto) {
         if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
     }
 }
