@@ -1,6 +1,5 @@
 package com.toy.shop.domain;
 
-import com.toy.shop.dto.MemberUpdateRequestDto;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import org.springframework.util.StringUtils;

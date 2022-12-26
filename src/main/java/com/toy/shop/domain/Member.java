@@ -1,10 +1,14 @@
 package com.toy.shop.domain;
 
-import com.toy.shop.dto.MemberSaveRequestDto;
-import com.toy.shop.dto.MemberUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.toy.shop.dto.MemberDto.UpdateRequest;
+import static com.toy.shop.dto.MemberDto.saveRequest;
 
 @Entity
 @Getter
@@ -19,7 +23,10 @@ public class Member extends BaseDomain {
     @Embedded
     private Address address;
 
-    public static Member createMember(MemberSaveRequestDto requestDto) {
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
+
+    public static Member createMember(saveRequest requestDto) {
         Member member = new Member();
 
         member.name = requestDto.getName();
@@ -28,7 +35,7 @@ public class Member extends BaseDomain {
         return member;
     }
 
-    public void updateMember(MemberUpdateRequestDto requestDto) {
+    public void updateMember(UpdateRequest requestDto) {
         if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
         this.address.updateAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
     }
