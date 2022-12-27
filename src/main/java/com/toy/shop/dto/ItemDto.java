@@ -54,7 +54,6 @@ public class ItemDto {
         private String description;
         private int price;
         private int quantity;
-        private Long categoryId;
 
         public Response(Item item) {
             this.id = item.getId();
@@ -62,7 +61,6 @@ public class ItemDto {
             this.description = item.getDescription();
             this.price = item.getPrice();
             this.quantity = item.getQuantity();
-            this.categoryId = item.getCategory().getId();
         }
     }
 }

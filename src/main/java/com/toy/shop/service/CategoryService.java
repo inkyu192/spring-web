@@ -1,18 +1,18 @@
 package com.toy.shop.service;
 
-import java.util.List;
+import com.toy.shop.dto.CategoryDto;
 
-import static com.toy.shop.dto.CategoryDto.*;
+import java.util.List;
 
 public interface CategoryService {
 
-    Response save(SaveRequest requestDto);
+    CategoryDto.Response save(CategoryDto.SaveRequest requestDto);
 
-    List<Response> findAll(String searchWord);
+    List<CategoryDto.Response> findAll(String searchWord);
 
-    Response findById(Long id);
+    CategoryDto.Response findById(Long id);
 
-    Response update(Long id, UpdateRequest requestDto);
+    CategoryDto.Response update(Long id, CategoryDto.UpdateRequest requestDto);
 
     void delete(Long id);
 }

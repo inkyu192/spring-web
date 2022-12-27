@@ -28,6 +28,7 @@ public class CategoryJpaRepository {
 
     public List<Category> findAll(String searchWord) {
         String jpql = "select c from Category c";
+
         ArrayList<String> whereCondition = new ArrayList<>();
 
         if (StringUtils.hasText(searchWord)) {

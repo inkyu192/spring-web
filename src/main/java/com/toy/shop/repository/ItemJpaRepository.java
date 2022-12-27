@@ -27,15 +27,16 @@ public class ItemJpaRepository {
     }
 
     public List<Item> findAll(Long categoryId, String searchWord) {
-        String jpql = "select b from Item b";
+        String jpql = "select i from Item i join fetch i.category c";
+
         ArrayList<String> whereCondition = new ArrayList<>();
 
         if (categoryId != null) {
-            whereCondition.add("b.categoryId = :categoryId");
+            whereCondition.add("i.categoryId = :categoryId");
         }
 
         if (StringUtils.hasText(searchWord)) {
-            whereCondition.add("b.name like concat('%', :searchWord, '%') or b.author like concat('%', :searchWord, '%') or b.publisher like concat('%', :searchWord, '%')");
+            whereCondition.add("i.name like concat('%', :searchWord, '%')");
         }
 
         if (!whereCondition.isEmpty()) {

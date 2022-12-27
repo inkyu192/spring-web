@@ -1,7 +1,9 @@
 package com.toy.shop.service;
 
+import com.toy.shop.common.ResultCode;
 import com.toy.shop.domain.Category;
 import com.toy.shop.domain.Item;
+import com.toy.shop.dto.ItemDto;
 import com.toy.shop.exception.CommonException;
 import com.toy.shop.repository.CategoryJpaRepository;
 import com.toy.shop.repository.ItemJpaRepository;
@@ -11,10 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.toy.shop.common.ResultCode.CATEGORY_NOT_FOUND;
-import static com.toy.shop.common.ResultCode.ITEM_NOT_FOUND;
-import static com.toy.shop.dto.ItemDto.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -29,52 +27,52 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public Response save(SaveRequest requestDto) {
-        Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new CommonException(CATEGORY_NOT_FOUND));
+    public ItemDto.Response save(ItemDto.SaveRequest requestDto) {
+        Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         Item item = Item.createItem(requestDto, category);
 
         itemRepository.save(item);
 
-        return new Response(item);
+        return new ItemDto.Response(item);
     }
 
     @Override
-    public List<Response> findAll(Long categoryId, String searchWord) {
+    public List<ItemDto.Response> findAll(Long categoryId, String searchWord) {
         List<Item> items = itemRepository.findAll(categoryId, searchWord);
 
         return items.stream()
-                .map(Response::new)
+                .map(ItemDto.Response::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Response findById(Long id) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ITEM_NOT_FOUND));
+    public ItemDto.Response findById(Long id) {
+        Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
-        return new Response(item);
+        return new ItemDto.Response(item);
     }
 
     @Override
     @Transactional
-    public Response update(Long id, UpdateRequest requestDto) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ITEM_NOT_FOUND));
+    public ItemDto.Response update(Long id, ItemDto.UpdateRequest requestDto) {
+        Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
         Category category = null;
 
         if (requestDto.getCategoryId() != null) {
-            category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new CommonException(CATEGORY_NOT_FOUND));
+            category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
         }
 
         item.updateItem(requestDto, category);
 
-        return new Response(item);
+        return new ItemDto.Response(item);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ITEM_NOT_FOUND));
+        Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
         itemRepository.delete(item);
     }
