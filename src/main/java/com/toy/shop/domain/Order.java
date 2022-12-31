@@ -2,12 +2,9 @@ package com.toy.shop.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.aspectj.weaver.ast.Or;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -35,15 +32,30 @@ public class Order extends BaseDomain {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+    public static Order createOrder(Member member, Delivery delivery, List<OrderItem> orderItems) {
         Order order = new Order();
 
-        order.member = member;
-        order.delivery = delivery;
-        Collections.addAll(order.orderItems, orderItems);
+        order.setMember(member);
+        order.setDelivery(delivery);
+        orderItems.forEach(order::setOrderItem);
         order.status = OrderStatus.ORDER;
         order.orderDate = LocalDateTime.now();
 
         return order;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
     }
 }

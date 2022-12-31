@@ -20,8 +20,8 @@ import static com.toy.shop.common.ResultCode.NOT_VALID;
 @RestControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler(DataNotFoundException.class)
-    public ResultDto NotFoundExceptionHandler(DataNotFoundException e) {
+    @ExceptionHandler(CommonException.class)
+    public ResultDto CommonExceptionHandler(CommonException e) {
         ResultCode resultCode = e.getResultCode();
 
         return new ResultDto(resultCode.getCode(), resultCode.getMessage(), null);

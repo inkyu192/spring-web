@@ -4,11 +4,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "아이템명",
-  "description": "아이템 설명",
-  "price": 10000,
+  "name": "아이템명1",
+  "description": "아이템 설명1",
+  "price": 5000,
   "quantity": 10,
-  "categoryId": 1
+  "categoryId": 3
 }
 
 ### items

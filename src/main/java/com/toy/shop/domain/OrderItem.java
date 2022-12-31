@@ -20,16 +20,22 @@ public class OrderItem extends BaseDomain {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private int price;
+    private int orderPrice;
     private int count;
 
-    public static OrderItem createOrderItem(Item item, int count) {
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
 
         orderItem.item = item;
-        orderItem.price = item.getPrice();
+        orderItem.orderPrice = orderPrice;
         orderItem.count = count;
 
+        item.removeQuantity(count);
+
         return orderItem;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

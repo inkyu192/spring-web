@@ -4,8 +4,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "카테고리444",
-  "description": "카테고리 설명"
+  "name": "카테고리1",
+  "description": "카테고리 설명1"
 }
 
 ### categories

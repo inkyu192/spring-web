@@ -34,15 +34,10 @@ public class CategoryDto {
 
         private String description;
 
-        private List<ItemDto.Response> items;
-
         public Response(Category category) {
             this.id = category.getId();
             this.name = category.getName();
             this.description = category.getDescription();
-            items = category.getItems().stream()
-                    .map(ItemDto.Response::new)
-                    .toList();
         }
     }
 }

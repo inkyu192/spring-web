@@ -3,6 +3,8 @@ package com.toy.shop.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import static com.toy.shop.dto.OrderDto.*;
+
 @Entity
 @Getter
 public class Delivery {
@@ -20,12 +22,16 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
-    public static Delivery createDelivery(Member member) {
+    public static Delivery createDelivery(SaveRequest requestDto) {
         Delivery delivery = new Delivery();
 
-        delivery.address = Address.createAddress(member.getAddress().getCity(), member.getAddress().getStreet(), member.getAddress().getZipcode());
+        delivery.address = Address.createAddress(requestDto.getCity(), requestDto.getStreet(), requestDto.getZipcode());
         delivery.status = DeliveryStatus.READY;
 
         return delivery;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

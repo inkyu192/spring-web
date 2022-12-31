@@ -1,8 +1,9 @@
 package com.toy.shop.service;
 
-import com.toy.shop.dto.OrderSaveRequestDto;
+import static com.toy.shop.dto.OrderDto.Response;
+import static com.toy.shop.dto.OrderDto.SaveRequest;
 
 public interface OrderService {
 
-    Long save(OrderSaveRequestDto requestDto);
+    Response save(SaveRequest requestDto);
 }
