@@ -1,9 +1,12 @@
 package com.toy.shop.service;
 
-import static com.toy.shop.dto.OrderDto.Response;
-import static com.toy.shop.dto.OrderDto.SaveRequest;
+import com.toy.shop.dto.OrderDto;
+
+import java.util.List;
 
 public interface OrderService {
 
-    Response save(SaveRequest requestDto);
+    OrderDto.Response save(OrderDto.SaveRequest requestDto);
+
+    List<OrderDto.Response> findAll();
 }

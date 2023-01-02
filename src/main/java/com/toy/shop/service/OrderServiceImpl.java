@@ -1,6 +1,7 @@
 package com.toy.shop.service;
 
 import com.toy.shop.domain.*;
+import com.toy.shop.dto.OrderDto;
 import com.toy.shop.exception.CommonException;
 import com.toy.shop.repository.ItemJpaRepository;
 import com.toy.shop.repository.MemberJpaRepository;
@@ -14,7 +15,6 @@ import java.util.List;
 
 import static com.toy.shop.common.ResultCode.ITEM_NOT_FOUND;
 import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
-import static com.toy.shop.dto.OrderDto.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public Response save(SaveRequest requestDto) {
+    public OrderDto.Response save(OrderDto.SaveRequest requestDto) {
         Member member = memberRepository.findById(requestDto.getMemberId()).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         List<OrderItem> orderItems = new ArrayList<>();
@@ -48,6 +48,15 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(order);
 
-        return new Response(order);
+        return new OrderDto.Response(order);
+    }
+
+    @Override
+    public List<OrderDto.Response> findAll() {
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream()
+                .map(OrderDto.Response::new)
+                .toList();
     }
 }
