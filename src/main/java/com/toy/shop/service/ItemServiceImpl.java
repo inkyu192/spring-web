@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -43,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
 
         return items.stream()
                 .map(ItemDto.Response::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

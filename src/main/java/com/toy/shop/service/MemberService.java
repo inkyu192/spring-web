@@ -1,18 +1,18 @@
 package com.toy.shop.service;
 
-import java.util.List;
+import com.toy.shop.dto.MemberDto;
 
-import static com.toy.shop.dto.MemberDto.*;
+import java.util.List;
 
 public interface MemberService {
 
-    Response save(saveRequest requestDto);
+    MemberDto.Response save(MemberDto.saveRequest requestDto);
 
-    List<Response> findAll(String searchWord);
+    List<MemberDto.Response> findAll(String searchWord);
 
-    Response findById(Long id);
+    MemberDto.Response findById(Long id);
 
-    Response update(Long id, UpdateRequest requestDto);
+    MemberDto.Response update(Long id, MemberDto.UpdateRequest requestDto);
 
     void delete(Long id);
 }

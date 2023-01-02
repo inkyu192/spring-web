@@ -28,6 +28,7 @@ public class MemberJpaRepository {
 
     public List<Member> findAll(String searchWord) {
         String jpql = "select m from Member m";
+
         ArrayList<String> whereCondition = new ArrayList<>();
 
         if (StringUtils.hasText(searchWord)) {

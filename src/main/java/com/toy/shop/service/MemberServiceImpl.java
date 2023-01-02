@@ -1,6 +1,7 @@
 package com.toy.shop.service;
 
 import com.toy.shop.domain.Member;
+import com.toy.shop.dto.MemberDto;
 import com.toy.shop.exception.CommonException;
 import com.toy.shop.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
-import static com.toy.shop.dto.MemberDto.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,38 +22,38 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public Response save(saveRequest requestDto) {
+    public MemberDto.Response save(MemberDto.saveRequest requestDto) {
         Member member = Member.createMember(requestDto);
 
         memberRepository.save(member);
 
-        return new Response(member);
+        return new MemberDto.Response(member);
     }
 
     @Override
-    public List<Response> findAll(String searchWord) {
+    public List<MemberDto.Response> findAll(String searchWord) {
         List<Member> members = memberRepository.findAll(searchWord);
 
         return members.stream()
-                .map(Response::new)
+                .map(MemberDto.Response::new)
                 .toList();
     }
 
     @Override
-    public Response findById(Long id) {
+    public MemberDto.Response findById(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
-        return new Response(member);
+        return new MemberDto.Response(member);
     }
 
     @Override
     @Transactional
-    public Response update(Long id, UpdateRequest requestDto) {
+    public MemberDto.Response update(Long id, MemberDto.UpdateRequest requestDto) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         member.updateMember(requestDto);
 
-        return new Response(member);
+        return new MemberDto.Response(member);
     }
 
     @Override
