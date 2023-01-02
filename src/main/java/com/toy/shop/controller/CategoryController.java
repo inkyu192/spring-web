@@ -24,8 +24,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public Object categories(@RequestParam(required = false) String searchWord) {
-        List<CategoryDto.Response> list = categoryService.findAll(searchWord);
+    public Object categories() {
+        List<CategoryDto.Response> list = categoryService.findAll();
 
         return new ResultDto<>(list);
     }

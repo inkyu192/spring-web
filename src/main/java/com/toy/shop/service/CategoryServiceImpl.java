@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,12 +30,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto.Response> findAll(String searchWord) {
-        List<Category> categories = categoryRepository.findAll(searchWord);
+    public List<CategoryDto.Response> findAll() {
+        List<Category> categories = categoryRepository.findAll();
 
         return categories.stream()
                 .map(CategoryDto.Response::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

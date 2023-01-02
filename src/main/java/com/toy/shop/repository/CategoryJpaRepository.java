@@ -26,25 +26,10 @@ public class CategoryJpaRepository {
         }
     }
 
-    public List<Category> findAll(String searchWord) {
+    public List<Category> findAll() {
         String jpql = "select c from Category c";
 
-        ArrayList<String> whereCondition = new ArrayList<>();
-
-        if (StringUtils.hasText(searchWord)) {
-            whereCondition.add("c.name like concat('%', :searchWord, '%')");
-        }
-
-        if (!whereCondition.isEmpty()) {
-            jpql += " where ";
-            jpql += String.join(" and ", whereCondition);
-        }
-
         TypedQuery<Category> query = entityManager.createQuery(jpql, Category.class);
-
-        if (StringUtils.hasText(searchWord)) {
-            query.setParameter("searchWord", searchWord);
-        }
 
         return query.getResultList();
     }

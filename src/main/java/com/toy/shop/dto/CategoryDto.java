@@ -31,7 +31,6 @@ public class CategoryDto {
 
         private Long id;
         private String name;
-
         private String description;
 
         public Response(Category category) {

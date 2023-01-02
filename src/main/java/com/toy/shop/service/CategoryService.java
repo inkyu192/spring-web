@@ -8,7 +8,7 @@ public interface CategoryService {
 
     CategoryDto.Response save(CategoryDto.SaveRequest requestDto);
 
-    List<CategoryDto.Response> findAll(String searchWord);
+    List<CategoryDto.Response> findAll();
 
     CategoryDto.Response findById(Long id);
 
