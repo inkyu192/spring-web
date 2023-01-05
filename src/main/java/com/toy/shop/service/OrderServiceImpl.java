@@ -52,8 +52,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto.Response> findAll(String memberName, OrderStatus orderStatus) {
-        List<Order> orders = orderRepository.findAll(memberName, orderStatus);
+    public List<OrderDto.Response> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus) {
+        List<Order> orders = orderRepository.findAll(memberId, orderStatus, deliveryStatus);
 
         return orders.stream()
                 .map(OrderDto.Response::new)

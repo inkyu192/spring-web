@@ -1,6 +1,7 @@
 package com.toy.shop.controller;
 
 import com.toy.shop.common.ResultDto;
+import com.toy.shop.domain.DeliveryStatus;
 import com.toy.shop.domain.OrderStatus;
 import com.toy.shop.dto.OrderDto;
 import com.toy.shop.service.OrderService;
@@ -25,9 +26,10 @@ public class OrderController {
     }
 
     @GetMapping
-    public Object orders(@RequestParam(required = false) String memberName,
-                         @RequestParam(required = false) OrderStatus orderStatus) {
-        List<OrderDto.Response> list = orderService.findAll(memberName, orderStatus);
+    public Object orders(@RequestParam Long memberId,
+                         @RequestParam(required = false) OrderStatus orderStatus,
+                         @RequestParam(required = false) DeliveryStatus deliveryStatus) {
+        List<OrderDto.Response> list = orderService.findAll(memberId, orderStatus, deliveryStatus);
 
         return new ResultDto<>(list);
     }

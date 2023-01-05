@@ -1,12 +1,12 @@
 package com.toy.shop.repository;
 
+import com.toy.shop.domain.DeliveryStatus;
 import com.toy.shop.domain.Order;
 import com.toy.shop.domain.OrderStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +26,16 @@ public class OrderJpaRepository {
         }
     }
 
-    public List<Order> findAll(String memberName, OrderStatus orderStatus) {
+    public List<Order> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus) {
         String jpql = "select o from Order o" +
                 " join fetch o.member m" +
                 " join fetch o.delivery d";
 
         ArrayList<String> whereCondition = new ArrayList<>();
 
-        if (StringUtils.hasText(memberName)) whereCondition.add("m.name like concat('%', :memberName, '%')");
-        if (orderStatus != null) whereCondition.add("o.status = :status");
+        if (memberId != null) whereCondition.add("m.id = :memberId");
+        if (orderStatus != null) whereCondition.add("o.status = :orderStatus");
+        if (deliveryStatus != null) whereCondition.add("o.status = :deliveryStatus");
 
         if (!whereCondition.isEmpty()) {
             jpql += " where ";
@@ -43,8 +44,9 @@ public class OrderJpaRepository {
 
         TypedQuery<Order> query = entityManager.createQuery(jpql, Order.class);
 
-        if (StringUtils.hasText(memberName)) query.setParameter("memberName", memberName);
-        if (orderStatus != null) query.setParameter("status", orderStatus);
+        if (memberId != null) query.setParameter("memberId", memberId);
+        if (orderStatus != null) query.setParameter("orderStatus", orderStatus);
+        if (deliveryStatus != null) query.setParameter("deliveryStatus", deliveryStatus);
 
         return query.getResultList();
     }
