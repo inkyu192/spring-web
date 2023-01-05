@@ -8,7 +8,7 @@ public interface MemberService {
 
     MemberDto.Response save(MemberDto.saveRequest requestDto);
 
-    List<MemberDto.Response> findAll(String searchWord);
+    List<MemberDto.Response> findAll(String name);
 
     MemberDto.Response findById(Long id);
 

@@ -24,8 +24,8 @@ public class MemberController {
     }
 
     @GetMapping
-    public Object members(@RequestParam(required = false) String searchWord) {
-        List<MemberDto.Response> list = memberService.findAll(searchWord);
+    public Object members(@RequestParam(required = false) String name) {
+        List<MemberDto.Response> list = memberService.findAll(name);
 
         return new ResultDto<>(list);
     }
@@ -38,7 +38,8 @@ public class MemberController {
     }
 
     @PatchMapping("{id}")
-    public Object updateMember(@PathVariable Long id, @RequestBody @Valid MemberDto.UpdateRequest requestDto) {
+    public Object updateMember(@PathVariable Long id,
+                               @RequestBody @Valid MemberDto.UpdateRequest requestDto) {
         MemberDto.Response responseDto = memberService.update(id, requestDto);
 
         return new ResultDto<>(responseDto);

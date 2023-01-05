@@ -26,14 +26,12 @@ public class MemberJpaRepository {
         }
     }
 
-    public List<Member> findAll(String searchWord) {
+    public List<Member> findAll(String name) {
         String jpql = "select m from Member m";
 
         ArrayList<String> whereCondition = new ArrayList<>();
 
-        if (StringUtils.hasText(searchWord)) {
-            whereCondition.add("m.name like concat('%', :searchWord, '%')");
-        }
+        if (StringUtils.hasText(name)) whereCondition.add("m.name like concat('%', :name, '%')");
 
         if (!whereCondition.isEmpty()) {
             jpql += " where ";
@@ -42,9 +40,7 @@ public class MemberJpaRepository {
 
         TypedQuery<Member> query = entityManager.createQuery(jpql, Member.class);
 
-        if (StringUtils.hasText(searchWord)) {
-            query.setParameter("searchWord", searchWord);
-        }
+        if (StringUtils.hasText(name)) query.setParameter("name", name);
 
         return query.getResultList();
     }

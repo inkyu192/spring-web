@@ -31,8 +31,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberDto.Response> findAll(String searchWord) {
-        List<Member> members = memberRepository.findAll(searchWord);
+    public List<MemberDto.Response> findAll(String name) {
+        List<Member> members = memberRepository.findAll(name);
 
         return members.stream()
                 .map(MemberDto.Response::new)
