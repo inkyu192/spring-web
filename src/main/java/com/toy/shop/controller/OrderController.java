@@ -1,6 +1,7 @@
 package com.toy.shop.controller;
 
 import com.toy.shop.common.ResultDto;
+import com.toy.shop.domain.OrderStatus;
 import com.toy.shop.dto.OrderDto;
 import com.toy.shop.service.OrderService;
 import jakarta.validation.Valid;
@@ -24,8 +25,9 @@ public class OrderController {
     }
 
     @GetMapping
-    public Object orders() {
-        List<OrderDto.Response> list = orderService.findAll();
+    public Object orders(@RequestParam(required = false) String memberName,
+                         @RequestParam(required = false) OrderStatus orderStatus) {
+        List<OrderDto.Response> list = orderService.findAll(memberName, orderStatus);
 
         return new ResultDto<>(list);
     }
