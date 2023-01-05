@@ -38,7 +38,8 @@ public class CategoryController {
     }
 
     @PatchMapping("{id}")
-    public Object updateCategory(@PathVariable Long id, @RequestBody @Valid CategoryDto.UpdateRequest requestDto) {
+    public Object updateCategory(@PathVariable Long id,
+                                 @RequestBody @Valid CategoryDto.UpdateRequest requestDto) {
         CategoryDto.Response responseDto = categoryService.update(id, requestDto);
 
         return new ResultDto<>(responseDto);
