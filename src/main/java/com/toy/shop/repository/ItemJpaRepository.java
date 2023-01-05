@@ -26,18 +26,15 @@ public class ItemJpaRepository {
         }
     }
 
-    public List<Item> findAll(Long categoryId, String searchWord) {
+    public List<Item> findAll(Long categoryId, String name) {
         String jpql = "select i from Item i";
+
+        if (categoryId != null) jpql += " join fetch i.category c";
 
         ArrayList<String> whereCondition = new ArrayList<>();
 
-        if (categoryId != null) {
-            whereCondition.add("i.categoryId = :categoryId");
-        }
-
-        if (StringUtils.hasText(searchWord)) {
-            whereCondition.add("i.name like concat('%', :searchWord, '%')");
-        }
+        if (categoryId != null) whereCondition.add("c.id = :categoryId");
+        if (StringUtils.hasText(name)) whereCondition.add("i.name like concat('%', :name, '%')");
 
         if (!whereCondition.isEmpty()) {
             jpql += " where ";
@@ -46,13 +43,8 @@ public class ItemJpaRepository {
 
         TypedQuery<Item> query = entityManager.createQuery(jpql, Item.class);
 
-        if (categoryId != null) {
-            query.setParameter("categoryId", categoryId);
-        }
-
-        if (StringUtils.hasText(searchWord)) {
-            query.setParameter("searchWord", searchWord);
-        }
+        if (categoryId != null) query.setParameter("categoryId", categoryId);
+        if (StringUtils.hasText(name)) query.setParameter("name", name);
 
         return query.getResultList();
     }

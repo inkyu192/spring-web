@@ -8,7 +8,7 @@ public interface ItemService {
 
     ItemDto.Response save(ItemDto.SaveRequest requestDto);
 
-    List<ItemDto.Response> findAll(Long categoryId, String searchWord);
+    List<ItemDto.Response> findAll(Long categoryId, String name);
 
     ItemDto.Response findById(Long id);
 

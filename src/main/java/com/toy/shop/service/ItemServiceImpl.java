@@ -37,8 +37,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto.Response> findAll(Long categoryId, String searchWord) {
-        List<Item> items = itemRepository.findAll(categoryId, searchWord);
+    public List<ItemDto.Response> findAll(Long categoryId, String name) {
+        List<Item> items = itemRepository.findAll(categoryId, name);
 
         return items.stream()
                 .map(ItemDto.Response::new)

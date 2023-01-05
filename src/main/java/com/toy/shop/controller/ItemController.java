@@ -24,8 +24,9 @@ public class ItemController {
     }
 
     @GetMapping
-    public Object items(@RequestParam(required = false) Long categoryId, @RequestParam(required = false) String searchWord) {
-        List<ItemDto.Response> list = itemService.findAll(categoryId, searchWord);
+    public Object items(@RequestParam(required = false) Long categoryId,
+                        @RequestParam(required = false) String name) {
+        List<ItemDto.Response> list = itemService.findAll(categoryId, name);
 
         return new ResultDto<>(list);
     }
@@ -38,7 +39,8 @@ public class ItemController {
     }
 
     @PatchMapping("{id}")
-    public Object updateItem(@PathVariable Long id, @RequestBody @Valid ItemDto.UpdateRequest requestDto) {
+    public Object updateItem(@PathVariable Long id,
+                             @RequestBody @Valid ItemDto.UpdateRequest requestDto) {
         ItemDto.Response responseDto = itemService.update(id, requestDto);
 
         return new ResultDto<>(responseDto);
