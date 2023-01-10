@@ -1,5 +1,7 @@
 package com.toy.shop.domain;
 
+import com.toy.shop.common.ResultCode;
+import com.toy.shop.exception.CommonException;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -57,5 +59,14 @@ public class Order extends BaseDomain {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    public void cancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP) {
+            throw new CommonException(ResultCode.ORDER_NOT_CANCEL);
+        }
+
+        this.status = OrderStatus.CANCEL;
+        orderItems.forEach(OrderItem::cancel);
     }
 }

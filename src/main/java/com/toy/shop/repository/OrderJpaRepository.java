@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class OrderJpaRepository {
 
         if (memberId != null) whereCondition.add("m.id = :memberId");
         if (orderStatus != null) whereCondition.add("o.status = :orderStatus");
-        if (deliveryStatus != null) whereCondition.add("o.status = :deliveryStatus");
+        if (deliveryStatus != null) whereCondition.add("d.status = :deliveryStatus");
 
         if (!whereCondition.isEmpty()) {
             jpql += " where ";
@@ -49,5 +50,9 @@ public class OrderJpaRepository {
         if (deliveryStatus != null) query.setParameter("deliveryStatus", deliveryStatus);
 
         return query.getResultList();
+    }
+
+    public Optional<Order> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Order.class, id));
     }
 }

@@ -38,4 +38,8 @@ public class OrderItem extends BaseDomain {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public void cancel() {
+        this.item.addQuantity(count);
+    }
 }

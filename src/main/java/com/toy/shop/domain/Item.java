@@ -55,4 +55,8 @@ public class Item extends BaseDomain {
 
         this.quantity = differenceQuantity;
     }
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
 }

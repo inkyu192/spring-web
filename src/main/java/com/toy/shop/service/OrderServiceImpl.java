@@ -1,5 +1,6 @@
 package com.toy.shop.service;
 
+import com.toy.shop.common.ResultCode;
 import com.toy.shop.domain.*;
 import com.toy.shop.dto.OrderDto;
 import com.toy.shop.exception.CommonException;
@@ -58,5 +59,14 @@ public class OrderServiceImpl implements OrderService {
         return orders.stream()
                 .map(OrderDto.Response::new)
                 .toList();
+    }
+
+    @Override
+    public OrderDto.Response update(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ORDER_NOT_FOUND));
+
+        order.cancel();
+
+        return new OrderDto.Response(order);
     }
 }

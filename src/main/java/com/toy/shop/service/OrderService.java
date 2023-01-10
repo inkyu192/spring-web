@@ -11,4 +11,6 @@ public interface OrderService {
     OrderDto.Response save(OrderDto.SaveRequest requestDto);
 
     List<OrderDto.Response> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus);
+
+    OrderDto.Response update(Long id);
 }
