@@ -1,10 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/shop
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-
   jpa:
     hibernate:
       ddl-auto: create
@@ -18,3 +12,39 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: info
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: h2
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/shop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: mysql
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/shop
+    username: sa
+    password: sa
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
