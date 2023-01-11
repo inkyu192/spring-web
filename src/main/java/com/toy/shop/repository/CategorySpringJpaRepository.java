@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CategorySpringJpaRepository extends JpaRepository<Category, Long>, CategoryQueryRepository {
+public interface CategorySpringJpaRepository extends JpaRepository<Category, Long> {
 }
