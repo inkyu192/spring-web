@@ -27,9 +27,8 @@ public class ItemJpaRepository {
     }
 
     public List<Item> findAll(Long categoryId, String name) {
-        String jpql = "select i from Item i";
-
-        if (categoryId != null) jpql += " join fetch i.category c";
+        String jpql = "select i from Item i" +
+                " join fetch i.category c";
 
         ArrayList<String> whereCondition = new ArrayList<>();
 
