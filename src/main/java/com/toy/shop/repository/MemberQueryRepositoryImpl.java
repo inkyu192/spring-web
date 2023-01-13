@@ -25,16 +25,16 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository {
     }
 
     @Override
-    public List<Member> findAll(String searchWord) {
+    public List<Member> findAll(String name) {
         return queryFactory.select(member)
                 .from(member)
-                .where(likeSearchWord(searchWord))
+                .where(likeSearchWord(name))
                 .fetch();
     }
 
-    private BooleanExpression likeSearchWord(String searchWord) {
-        if (StringUtils.hasText(searchWord)) {
-            return member.name.like("%" + searchWord + "%");
+    private BooleanExpression likeSearchWord(String name) {
+        if (StringUtils.hasText(name)) {
+            return member.name.like("%" + name + "%");
         }
 
         return null;
