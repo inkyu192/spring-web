@@ -37,7 +37,7 @@ public class CategoryController {
         return new ResultDto<>(responseDto);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public Object updateCategory(@PathVariable Long id,
                                  @RequestBody @Valid CategoryDto.UpdateRequest requestDto) {
         CategoryDto.Response responseDto = categoryService.update(id, requestDto);
@@ -45,7 +45,7 @@ public class CategoryController {
         return new ResultDto<>(responseDto);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Object deleteCategory(@PathVariable Long id) {
         categoryService.delete(id);
 

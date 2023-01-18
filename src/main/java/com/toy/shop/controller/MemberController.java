@@ -30,14 +30,14 @@ public class MemberController {
         return new ResultDto<>(list);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Object member(@PathVariable Long id) {
         MemberDto.Response responseDto = memberService.findById(id);
 
         return new ResultDto<>(responseDto);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public Object updateMember(@PathVariable Long id,
                                @RequestBody @Valid MemberDto.UpdateRequest requestDto) {
         MemberDto.Response responseDto = memberService.update(id, requestDto);
@@ -45,7 +45,7 @@ public class MemberController {
         return new ResultDto<>(responseDto);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Object deleteMember(@PathVariable Long id) {
         memberService.delete(id);
 

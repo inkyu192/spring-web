@@ -38,7 +38,7 @@ public class ItemController {
         return new ResultDto<>(responseDto);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public Object updateItem(@PathVariable Long id,
                              @RequestBody @Valid ItemDto.UpdateRequest requestDto) {
         ItemDto.Response responseDto = itemService.update(id, requestDto);
@@ -46,7 +46,7 @@ public class ItemController {
         return new ResultDto<>(responseDto);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Object deleteItem(@PathVariable Long id) {
         itemService.delete(id);
 

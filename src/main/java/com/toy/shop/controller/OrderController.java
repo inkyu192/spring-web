@@ -41,7 +41,7 @@ public class OrderController {
         return new ResultDto<>(responseDto);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public Object cancelOrder(@PathVariable Long id) {
         OrderDto.Response responseDto = orderService.update(id);
 
