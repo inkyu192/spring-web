@@ -12,5 +12,7 @@ public interface OrderService {
 
     List<OrderDto.Response> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus);
 
+    OrderDto.Response findById(Long id);
+
     OrderDto.Response update(Long id);
 }

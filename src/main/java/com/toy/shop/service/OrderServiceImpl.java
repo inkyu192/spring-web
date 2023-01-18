@@ -62,6 +62,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderDto.Response findById(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ORDER_NOT_FOUND));
+
+        return new OrderDto.Response(order);
+    }
+
+    @Override
     public OrderDto.Response update(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ORDER_NOT_FOUND));
 

@@ -34,6 +34,13 @@ public class OrderController {
         return new ResultDto<>(list);
     }
 
+    @GetMapping("/{id}")
+    public Object order(@PathVariable Long id) {
+        OrderDto.Response responseDto = orderService.findById(id);
+
+        return new ResultDto<>(responseDto);
+    }
+
     @PatchMapping("{id}")
     public Object cancelOrder(@PathVariable Long id) {
         OrderDto.Response responseDto = orderService.update(id);
