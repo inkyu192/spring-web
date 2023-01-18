@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryDto.Response save(CategoryDto.SaveRequest requestDto) {
+    public CategoryDto.Response saveCategory(CategoryDto.SaveRequest requestDto) {
         Category category = Category.createCategory(requestDto);
 
         categoryRepository.save(category);
@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto.Response> findAll() {
+    public List<CategoryDto.Response> categories() {
         List<Category> categories = categoryRepository.findAll();
 
         return categories.stream()
@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto.Response findById(Long id) {
+    public CategoryDto.Response category(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         return new CategoryDto.Response(category);
@@ -47,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryDto.Response update(Long id, CategoryDto.UpdateRequest requestDto) {
+    public CategoryDto.Response updateCategory(Long id, CategoryDto.UpdateRequest requestDto) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         category.updateCategory(requestDto);
@@ -57,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void deleteCategory(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         categoryRepository.delete(category);

@@ -18,21 +18,21 @@ public class CategoryController {
 
     @PostMapping
     public Object saveCategory(@RequestBody @Valid CategoryDto.SaveRequest requestDto) {
-        CategoryDto.Response responseDto = categoryService.save(requestDto);
+        CategoryDto.Response responseDto = categoryService.saveCategory(requestDto);
 
         return new ResultDto<>(responseDto);
     }
 
     @GetMapping
     public Object categories() {
-        List<CategoryDto.Response> list = categoryService.findAll();
+        List<CategoryDto.Response> list = categoryService.categories();
 
         return new ResultDto<>(list);
     }
 
     @GetMapping("/{id}")
     public Object category(@PathVariable Long id) {
-        CategoryDto.Response responseDto = categoryService.findById(id);
+        CategoryDto.Response responseDto = categoryService.category(id);
 
         return new ResultDto<>(responseDto);
     }
@@ -40,14 +40,14 @@ public class CategoryController {
     @PatchMapping("/{id}")
     public Object updateCategory(@PathVariable Long id,
                                  @RequestBody @Valid CategoryDto.UpdateRequest requestDto) {
-        CategoryDto.Response responseDto = categoryService.update(id, requestDto);
+        CategoryDto.Response responseDto = categoryService.updateCategory(id, requestDto);
 
         return new ResultDto<>(responseDto);
     }
 
     @DeleteMapping("/{id}")
     public Object deleteCategory(@PathVariable Long id) {
-        categoryService.delete(id);
+        categoryService.deleteCategory(id);
 
         return new ResultDto<>();
     }

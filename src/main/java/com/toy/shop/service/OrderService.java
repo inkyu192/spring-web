@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderDto.Response save(OrderDto.SaveRequest requestDto);
+    OrderDto.Response saveOrder(OrderDto.SaveRequest requestDto);
 
-    List<OrderDto.Response> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus);
+    List<OrderDto.Response> orders(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus);
 
-    OrderDto.Response findById(Long id);
+    OrderDto.Response order(Long id);
 
-    OrderDto.Response update(Long id);
+    OrderDto.Response cancelOrder(Long id);
 }

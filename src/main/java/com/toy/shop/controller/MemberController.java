@@ -18,21 +18,21 @@ public class MemberController {
 
     @PostMapping
     public Object saveMember(@RequestBody @Valid MemberDto.saveRequest requestDto) {
-        MemberDto.Response responseDto = memberService.save(requestDto);
+        MemberDto.Response responseDto = memberService.saveMember(requestDto);
 
         return new ResultDto<>(responseDto);
     }
 
     @GetMapping
     public Object members(@RequestParam(required = false) String name) {
-        List<MemberDto.Response> list = memberService.findAll(name);
+        List<MemberDto.Response> list = memberService.members(name);
 
         return new ResultDto<>(list);
     }
 
     @GetMapping("/{id}")
     public Object member(@PathVariable Long id) {
-        MemberDto.Response responseDto = memberService.findById(id);
+        MemberDto.Response responseDto = memberService.member(id);
 
         return new ResultDto<>(responseDto);
     }
@@ -40,14 +40,14 @@ public class MemberController {
     @PatchMapping("/{id}")
     public Object updateMember(@PathVariable Long id,
                                @RequestBody @Valid MemberDto.UpdateRequest requestDto) {
-        MemberDto.Response responseDto = memberService.update(id, requestDto);
+        MemberDto.Response responseDto = memberService.updateMember(id, requestDto);
 
         return new ResultDto<>(responseDto);
     }
 
     @DeleteMapping("/{id}")
     public Object deleteMember(@PathVariable Long id) {
-        memberService.delete(id);
+        memberService.deleteMember(id);
 
         return new ResultDto<>();
     }

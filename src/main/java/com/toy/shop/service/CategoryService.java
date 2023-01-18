@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryDto.Response save(CategoryDto.SaveRequest requestDto);
+    CategoryDto.Response saveCategory(CategoryDto.SaveRequest requestDto);
 
-    List<CategoryDto.Response> findAll();
+    List<CategoryDto.Response> categories();
 
-    CategoryDto.Response findById(Long id);
+    CategoryDto.Response category(Long id);
 
-    CategoryDto.Response update(Long id, CategoryDto.UpdateRequest requestDto);
+    CategoryDto.Response updateCategory(Long id, CategoryDto.UpdateRequest requestDto);
 
-    void delete(Long id);
+    void deleteCategory(Long id);
 }

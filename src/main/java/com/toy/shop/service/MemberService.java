@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface MemberService {
 
-    MemberDto.Response save(MemberDto.saveRequest requestDto);
+    MemberDto.Response saveMember(MemberDto.saveRequest requestDto);
 
-    List<MemberDto.Response> findAll(String name);
+    List<MemberDto.Response> members(String name);
 
-    MemberDto.Response findById(Long id);
+    MemberDto.Response member(Long id);
 
-    MemberDto.Response update(Long id, MemberDto.UpdateRequest requestDto);
+    MemberDto.Response updateMember(Long id, MemberDto.UpdateRequest requestDto);
 
-    void delete(Long id);
+    void deleteMember(Long id);
 }

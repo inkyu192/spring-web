@@ -18,7 +18,7 @@ public class ItemController {
 
     @PostMapping
     public Object saveItem(@RequestBody @Valid ItemDto.SaveRequest requestDto) {
-        ItemDto.Response responseDto = itemService.save(requestDto);
+        ItemDto.Response responseDto = itemService.saveItem(requestDto);
 
         return new ResultDto<>(responseDto);
     }
@@ -26,14 +26,14 @@ public class ItemController {
     @GetMapping
     public Object items(@RequestParam(required = false) Long categoryId,
                         @RequestParam(required = false) String name) {
-        List<ItemDto.Response> list = itemService.findAll(categoryId, name);
+        List<ItemDto.Response> list = itemService.items(categoryId, name);
 
         return new ResultDto<>(list);
     }
 
     @GetMapping("/{id}")
     public Object item(@PathVariable Long id) {
-        ItemDto.Response responseDto = itemService.findById(id);
+        ItemDto.Response responseDto = itemService.item(id);
 
         return new ResultDto<>(responseDto);
     }
@@ -41,14 +41,14 @@ public class ItemController {
     @PatchMapping("/{id}")
     public Object updateItem(@PathVariable Long id,
                              @RequestBody @Valid ItemDto.UpdateRequest requestDto) {
-        ItemDto.Response responseDto = itemService.update(id, requestDto);
+        ItemDto.Response responseDto = itemService.updateItem(id, requestDto);
 
         return new ResultDto<>(responseDto);
     }
 
     @DeleteMapping("/{id}")
     public Object deleteItem(@PathVariable Long id) {
-        itemService.delete(id);
+        itemService.deleteItem(id);
 
         return new ResultDto<>();
     }

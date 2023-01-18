@@ -20,7 +20,7 @@ public class OrderController {
 
     @PostMapping
     public Object saveOrder(@RequestBody @Valid OrderDto.SaveRequest requestDto) {
-        OrderDto.Response responseDto = orderService.save(requestDto);
+        OrderDto.Response responseDto = orderService.saveOrder(requestDto);
 
         return new ResultDto<>(responseDto);
     }
@@ -29,21 +29,21 @@ public class OrderController {
     public Object orders(@RequestParam Long memberId,
                          @RequestParam(required = false) OrderStatus orderStatus,
                          @RequestParam(required = false) DeliveryStatus deliveryStatus) {
-        List<OrderDto.Response> list = orderService.findAll(memberId, orderStatus, deliveryStatus);
+        List<OrderDto.Response> list = orderService.orders(memberId, orderStatus, deliveryStatus);
 
         return new ResultDto<>(list);
     }
 
     @GetMapping("/{id}")
     public Object order(@PathVariable Long id) {
-        OrderDto.Response responseDto = orderService.findById(id);
+        OrderDto.Response responseDto = orderService.order(id);
 
         return new ResultDto<>(responseDto);
     }
 
     @PatchMapping("/{id}")
     public Object cancelOrder(@PathVariable Long id) {
-        OrderDto.Response responseDto = orderService.update(id);
+        OrderDto.Response responseDto = orderService.cancelOrder(id);
 
         return new ResultDto<>(responseDto);
     }

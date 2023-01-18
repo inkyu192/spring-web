@@ -26,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public ItemDto.Response save(ItemDto.SaveRequest requestDto) {
+    public ItemDto.Response saveItem(ItemDto.SaveRequest requestDto) {
         Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         Item item = Item.createItem(requestDto, category);
@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto.Response> findAll(Long categoryId, String name) {
+    public List<ItemDto.Response> items(Long categoryId, String name) {
         List<Item> items = itemRepository.findAll(categoryId, name);
 
         return items.stream()
@@ -46,7 +46,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto.Response findById(Long id) {
+    public ItemDto.Response item(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
         return new ItemDto.Response(item);
@@ -54,7 +54,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public ItemDto.Response update(Long id, ItemDto.UpdateRequest requestDto) {
+    public ItemDto.Response updateItem(Long id, ItemDto.UpdateRequest requestDto) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
         Category category = null;
@@ -70,7 +70,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void deleteItem(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
         itemRepository.delete(item);

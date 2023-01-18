@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto.Response save(OrderDto.SaveRequest requestDto) {
+    public OrderDto.Response saveOrder(OrderDto.SaveRequest requestDto) {
         Member member = memberRepository.findById(requestDto.getMemberId()).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         List<OrderItem> orderItems = new ArrayList<>();
@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto.Response> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus) {
+    public List<OrderDto.Response> orders(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus) {
         List<Order> orders = orderRepository.findAll(memberId, orderStatus, deliveryStatus);
 
         return orders.stream()
@@ -62,14 +62,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto.Response findById(Long id) {
+    public OrderDto.Response order(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ORDER_NOT_FOUND));
 
         return new OrderDto.Response(order);
     }
 
     @Override
-    public OrderDto.Response update(Long id) {
+    public OrderDto.Response cancelOrder(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ORDER_NOT_FOUND));
 
         order.cancel();

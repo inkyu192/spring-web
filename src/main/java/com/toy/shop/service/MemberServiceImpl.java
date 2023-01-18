@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberDto.Response save(MemberDto.saveRequest requestDto) {
+    public MemberDto.Response saveMember(MemberDto.saveRequest requestDto) {
         Member member = Member.createMember(requestDto);
 
         memberRepository.save(member);
@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberDto.Response> findAll(String name) {
+    public List<MemberDto.Response> members(String name) {
         List<Member> members = memberRepository.findAll(name);
 
         return members.stream()
@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto.Response findById(Long id) {
+    public MemberDto.Response member(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         return new MemberDto.Response(member);
@@ -48,7 +48,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberDto.Response update(Long id, MemberDto.UpdateRequest requestDto) {
+    public MemberDto.Response updateMember(Long id, MemberDto.UpdateRequest requestDto) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         member.updateMember(requestDto);
@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void deleteMember(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         memberRepository.delete(member);
