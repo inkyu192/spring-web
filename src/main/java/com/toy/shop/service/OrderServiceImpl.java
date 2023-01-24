@@ -29,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 //    private final ItemSpringJpaRepository itemRepository;
 
     private final OrderJpaRepository orderRepository;
+//    private final OrderSpringJpaRepository orderRepository;
 
     @Override
     @Transactional
