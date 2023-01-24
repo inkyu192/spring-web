@@ -28,11 +28,11 @@ public class ItemQueryRepositoryImpl implements ItemQueryRepository {
     public List<Item> findAll(Long categoryId, String name) {
         return queryFactory.select(item)
                 .from(item)
-                .join(category)
+                .join(item.category, category)
                 .fetchJoin()
                 .where(
                         categoryId(categoryId),
-                        likeSearchWord(name)
+                        name(name)
                 )
                 .fetch();
     }
@@ -44,7 +44,7 @@ public class ItemQueryRepositoryImpl implements ItemQueryRepository {
         return null;
     }
 
-    private BooleanExpression likeSearchWord(String name) {
+    private BooleanExpression name(String name) {
         if (StringUtils.hasText(name)) {
             return item.name.like("%" + name + "%");
         }
