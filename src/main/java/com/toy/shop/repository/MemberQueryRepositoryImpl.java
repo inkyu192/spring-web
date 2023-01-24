@@ -28,11 +28,11 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository {
     public List<Member> findAll(String name) {
         return queryFactory.select(member)
                 .from(member)
-                .where(likeSearchWord(name))
+                .where(name(name))
                 .fetch();
     }
 
-    private BooleanExpression likeSearchWord(String name) {
+    private BooleanExpression name(String name) {
         if (StringUtils.hasText(name)) {
             return member.name.like("%" + name + "%");
         }
