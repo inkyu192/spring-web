@@ -1,7 +1,9 @@
 package com.toy.shop.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import static com.toy.shop.dto.CategoryDto.UpdateRequest;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category extends BaseDomain {
 
     @Id @GeneratedValue

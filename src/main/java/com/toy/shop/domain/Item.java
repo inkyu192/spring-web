@@ -2,7 +2,9 @@ package com.toy.shop.domain;
 
 import com.toy.shop.exception.CommonException;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import static com.toy.shop.common.ResultCode.ITEM_QUANTITY_NOT_ENOUGH;
@@ -11,6 +13,7 @@ import static com.toy.shop.dto.ItemDto.UpdateRequest;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseDomain {
 
     @Id @GeneratedValue

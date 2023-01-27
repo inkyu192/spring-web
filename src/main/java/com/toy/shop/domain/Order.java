@@ -3,15 +3,18 @@ package com.toy.shop.domain;
 import com.toy.shop.common.ResultCode;
 import com.toy.shop.exception.CommonException;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
 @Getter
+@Table(name = "orders")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order extends BaseDomain {
 
     @Id @GeneratedValue
