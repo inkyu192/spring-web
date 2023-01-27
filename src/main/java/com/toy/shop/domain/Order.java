@@ -70,6 +70,6 @@ public class Order extends BaseDomain {
         }
 
         this.status = OrderStatus.CANCEL;
-        orderItems.forEach(OrderItem::cancel);
+        this.orderItems.forEach(OrderItem::cancel);
     }
 }
