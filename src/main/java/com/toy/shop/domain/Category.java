@@ -24,8 +24,8 @@ public class Category extends BaseDomain {
 
     private String description;
 
-    @OneToMany(mappedBy = "category")
-    private List<Item> items = new ArrayList<>();
+//    @OneToMany(mappedBy = "category")
+//    private List<Item> items = new ArrayList<>();
 
     public static Category createCategory(SaveRequest requestDto) {
         Category category = new Category();
