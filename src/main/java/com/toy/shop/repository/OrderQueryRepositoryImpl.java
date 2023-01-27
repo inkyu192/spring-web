@@ -28,7 +28,8 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
 
     @Override
     public List<Order> findAll(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus) {
-        return queryFactory.select(order)
+        return queryFactory
+                .select(order)
                 .from(order)
                 .join(order.member, member)
                 .fetchJoin()

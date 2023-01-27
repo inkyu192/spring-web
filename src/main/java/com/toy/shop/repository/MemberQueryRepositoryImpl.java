@@ -26,7 +26,8 @@ public class MemberQueryRepositoryImpl implements MemberQueryRepository {
 
     @Override
     public List<Member> findAll(String name) {
-        return queryFactory.select(member)
+        return queryFactory
+                .select(member)
                 .from(member)
                 .where(name(name))
                 .fetch();

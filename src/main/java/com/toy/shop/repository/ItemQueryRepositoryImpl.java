@@ -26,7 +26,8 @@ public class ItemQueryRepositoryImpl implements ItemQueryRepository {
 
     @Override
     public List<Item> findAll(Long categoryId, String name) {
-        return queryFactory.select(item)
+        return queryFactory
+                .select(item)
                 .from(item)
                 .join(item.category, category)
                 .fetchJoin()
