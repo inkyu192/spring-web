@@ -3,12 +3,11 @@ package com.toy.shop.dto;
 import com.toy.shop.domain.Category;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
-
-import java.util.List;
+import lombok.Setter;
 
 public class CategoryDto {
 
-    @Getter
+    @Getter @Setter
     public static class SaveRequest {
 
         @NotEmpty

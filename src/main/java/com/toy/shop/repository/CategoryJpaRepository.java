@@ -24,12 +24,14 @@ public class CategoryJpaRepository {
         }
     }
 
+    public long count() {
+        return entityManager.createQuery("select count(c) from Category c", Long.class)
+                .getSingleResult();
+    }
+
     public List<Category> findAll() {
-        String jpql = "select c from Category c";
-
-        TypedQuery<Category> query = entityManager.createQuery(jpql, Category.class);
-
-        return query.getResultList();
+        return entityManager.createQuery("select c from Category c", Category.class)
+                .getResultList();
     }
 
     public Optional<Category> findById(Long id) {
