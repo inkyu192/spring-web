@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderDto {
 
     @Getter
-    public static class SaveRequest {
+    public static class Save {
 
         @NotNull
         private Long memberId;
@@ -28,7 +28,7 @@ public class OrderDto {
         private String zipcode;
 
         @NotNull
-        private List<OrderItemDto.SaveRequest> orderItems;
+        private List<OrderItemDto.Save> orderItems;
     }
 
     @Getter

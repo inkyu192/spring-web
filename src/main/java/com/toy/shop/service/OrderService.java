@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderDto.Response saveOrder(OrderDto.SaveRequest requestDto);
+    OrderDto.Response saveOrder(OrderDto.Save requestDto);
 
     List<OrderDto.Response> orders(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus);
 

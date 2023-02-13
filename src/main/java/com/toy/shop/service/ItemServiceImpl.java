@@ -26,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public ItemDto.Response saveItem(ItemDto.SaveRequest requestDto) {
+    public ItemDto.Response saveItem(ItemDto.Save requestDto) {
         Category category = categoryRepository.findById(requestDto.getCategoryId()).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         Item item = Item.createItem(requestDto, category);
@@ -54,7 +54,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public ItemDto.Response updateItem(Long id, ItemDto.UpdateRequest requestDto) {
+    public ItemDto.Response updateItem(Long id, ItemDto.Update requestDto) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.ITEM_NOT_FOUND));
 
         Category category = null;

@@ -17,7 +17,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public Object saveCategory(@RequestBody @Valid CategoryDto.SaveRequest requestDto) {
+    public Object saveCategory(@RequestBody @Valid CategoryDto.Save requestDto) {
         CategoryDto.Response responseDto = categoryService.saveCategory(requestDto);
 
         return new ResultDto<>(responseDto);
@@ -39,7 +39,7 @@ public class CategoryController {
 
     @PatchMapping("/{id}")
     public Object updateCategory(@PathVariable Long id,
-                                 @RequestBody @Valid CategoryDto.UpdateRequest requestDto) {
+                                 @RequestBody @Valid CategoryDto.Update requestDto) {
         CategoryDto.Response responseDto = categoryService.updateCategory(id, requestDto);
 
         return new ResultDto<>(responseDto);

@@ -17,7 +17,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @PostMapping
-    public Object saveItem(@RequestBody @Valid ItemDto.SaveRequest requestDto) {
+    public Object saveItem(@RequestBody @Valid ItemDto.Save requestDto) {
         ItemDto.Response responseDto = itemService.saveItem(requestDto);
 
         return new ResultDto<>(responseDto);
@@ -40,7 +40,7 @@ public class ItemController {
 
     @PatchMapping("/{id}")
     public Object updateItem(@PathVariable Long id,
-                             @RequestBody @Valid ItemDto.UpdateRequest requestDto) {
+                             @RequestBody @Valid ItemDto.Update requestDto) {
         ItemDto.Response responseDto = itemService.updateItem(id, requestDto);
 
         return new ResultDto<>(responseDto);

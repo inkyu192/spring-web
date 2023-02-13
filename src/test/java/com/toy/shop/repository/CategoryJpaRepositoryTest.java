@@ -20,11 +20,11 @@ class CategoryJpaRepositoryTest {
 
     @Test
     public void basicCRUD() {
-        CategoryDto.SaveRequest requestA = new CategoryDto.SaveRequest();
+        CategoryDto.Save requestA = new CategoryDto.Save();
         requestA.setName("TeamA");
         Category categoryA = Category.createCategory(requestA);
 
-        CategoryDto.SaveRequest requestB = new CategoryDto.SaveRequest();
+        CategoryDto.Save requestB = new CategoryDto.Save();
         requestB.setName("TeamB");
         Category categoryB = Category.createCategory(requestB);
 

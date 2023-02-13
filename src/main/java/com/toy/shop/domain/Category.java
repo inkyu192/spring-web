@@ -26,7 +26,7 @@ public class Category extends BaseDomain {
 //    @OneToMany(mappedBy = "category")
 //    private List<Item> items = new ArrayList<>();
 
-    public static Category createCategory(CategoryDto.SaveRequest requestDto) {
+    public static Category createCategory(CategoryDto.Save requestDto) {
         Category category = new Category();
         category.name = requestDto.getName();
         category.description = requestDto.getDescription();
@@ -34,7 +34,7 @@ public class Category extends BaseDomain {
         return category;
     }
 
-    public void updateCategory(CategoryDto.UpdateRequest requestDto) {
+    public void updateCategory(CategoryDto.Update requestDto) {
         if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
     }
 }

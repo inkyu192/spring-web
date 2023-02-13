@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import static com.toy.shop.common.ResultCode.ITEM_QUANTITY_NOT_ENOUGH;
-import static com.toy.shop.dto.ItemDto.SaveRequest;
-import static com.toy.shop.dto.ItemDto.UpdateRequest;
+import static com.toy.shop.dto.ItemDto.Save;
+import static com.toy.shop.dto.ItemDto.Update;
 
 @Entity
 @Getter
@@ -29,7 +29,7 @@ public class Item extends BaseDomain {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public static Item createItem(SaveRequest requestDto, Category category) {
+    public static Item createItem(Save requestDto, Category category) {
         Item item = new Item();
 
         item.name = requestDto.getName();
@@ -41,7 +41,7 @@ public class Item extends BaseDomain {
         return item;
     }
 
-    public void updateItem(UpdateRequest requestDto, Category category) {
+    public void updateItem(Update requestDto, Category category) {
         if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
         if (StringUtils.hasText(requestDto.getDescription())) this.description = requestDto.getDescription();
         if (requestDto.getPrice() != null) this.price = requestDto.getPrice();

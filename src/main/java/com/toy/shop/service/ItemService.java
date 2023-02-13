@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface ItemService {
 
-    ItemDto.Response saveItem(ItemDto.SaveRequest requestDto);
+    ItemDto.Response saveItem(ItemDto.Save requestDto);
 
     List<ItemDto.Response> items(Long categoryId, String name);
 
     ItemDto.Response item(Long id);
 
-    ItemDto.Response updateItem(Long id, ItemDto.UpdateRequest requestDto);
+    ItemDto.Response updateItem(Long id, ItemDto.Update requestDto);
 
     void deleteItem(Long id);
 }

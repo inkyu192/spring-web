@@ -8,7 +8,7 @@ import lombok.Getter;
 public class OrderItemDto {
 
     @Getter
-    public static class SaveRequest {
+    public static class Save {
 
         @NotEmpty
         private Long itemId;

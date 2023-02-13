@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto.Response saveOrder(OrderDto.SaveRequest requestDto) {
+    public OrderDto.Response saveOrder(OrderDto.Save requestDto) {
         Member member = memberRepository.findById(requestDto.getMemberId()).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         List<OrderItem> orderItems = new ArrayList<>();

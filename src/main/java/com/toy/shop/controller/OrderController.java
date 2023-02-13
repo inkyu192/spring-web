@@ -19,7 +19,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public Object saveOrder(@RequestBody @Valid OrderDto.SaveRequest requestDto) {
+    public Object saveOrder(@RequestBody @Valid OrderDto.Save requestDto) {
         OrderDto.Response responseDto = orderService.saveOrder(requestDto);
 
         return new ResultDto<>(responseDto);

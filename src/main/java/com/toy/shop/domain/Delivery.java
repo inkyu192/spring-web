@@ -25,7 +25,7 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
-    public static Delivery createDelivery(SaveRequest requestDto) {
+    public static Delivery createDelivery(Save requestDto) {
         Delivery delivery = new Delivery();
 
         delivery.address = Address.createAddress(requestDto.getCity(), requestDto.getStreet(), requestDto.getZipcode());

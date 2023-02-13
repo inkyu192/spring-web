@@ -8,7 +8,7 @@ import lombok.Setter;
 public class CategoryDto {
 
     @Getter @Setter
-    public static class SaveRequest {
+    public static class Save {
 
         @NotEmpty
         private String name;
@@ -18,7 +18,7 @@ public class CategoryDto {
     }
 
     @Getter
-    public static class UpdateRequest {
+    public static class Update {
 
         private String name;
 

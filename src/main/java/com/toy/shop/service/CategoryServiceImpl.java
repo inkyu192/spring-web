@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryDto.Response saveCategory(CategoryDto.SaveRequest requestDto) {
+    public CategoryDto.Response saveCategory(CategoryDto.Save requestDto) {
         Category category = Category.createCategory(requestDto);
 
         categoryRepository.save(category);
@@ -47,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryDto.Response updateCategory(Long id, CategoryDto.UpdateRequest requestDto) {
+    public CategoryDto.Response updateCategory(Long id, CategoryDto.Update requestDto) {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new CommonException(ResultCode.CATEGORY_NOT_FOUND));
 
         category.updateCategory(requestDto);

@@ -10,7 +10,7 @@ import lombok.Getter;
 public class ItemDto {
 
     @Getter
-    public static class SaveRequest {
+    public static class Save {
 
         @NotEmpty
         private String name;
@@ -31,7 +31,7 @@ public class ItemDto {
     }
 
     @Getter
-    public static class UpdateRequest {
+    public static class Update {
 
         private String name;
 
