@@ -9,8 +9,8 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.toy.shop.dto.MemberDto.UpdateRequest;
-import static com.toy.shop.dto.MemberDto.saveRequest;
+import static com.toy.shop.dto.MemberDto.Update;
+import static com.toy.shop.dto.MemberDto.Save;
 
 @Entity
 @Getter
@@ -29,7 +29,7 @@ public class Member extends BaseDomain {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    public static Member createMember(saveRequest requestDto) {
+    public static Member createMember(Save requestDto) {
         Member member = new Member();
 
         member.name = requestDto.getName();
@@ -38,7 +38,7 @@ public class Member extends BaseDomain {
         return member;
     }
 
-    public void updateMember(UpdateRequest requestDto) {
+    public void updateMember(Update requestDto) {
         if (StringUtils.hasText(requestDto.getName())) this.name = requestDto.getName();
         this.address.updateAddress((requestDto.getCity()), requestDto.getStreet(), requestDto.getZipcode());
     }

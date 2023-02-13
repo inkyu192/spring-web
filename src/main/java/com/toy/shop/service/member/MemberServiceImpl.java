@@ -1,4 +1,4 @@
-package com.toy.shop.service;
+package com.toy.shop.service.member;
 
 import com.toy.shop.domain.Member;
 import com.toy.shop.dto.MemberDto;
@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberDto.Response saveMember(MemberDto.saveRequest requestDto) {
+    public MemberDto.Response saveMember(MemberDto.Save requestDto) {
         Member member = Member.createMember(requestDto);
 
         memberRepository.save(member);
@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberDto.Response updateMember(Long id, MemberDto.UpdateRequest requestDto) {
+    public MemberDto.Response updateMember(Long id, MemberDto.Update requestDto) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new CommonException(MEMBER_NOT_FOUND));
 
         member.updateMember(requestDto);

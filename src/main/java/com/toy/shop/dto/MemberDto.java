@@ -7,7 +7,7 @@ import lombok.Getter;
 public class MemberDto {
 
     @Getter
-    public static class saveRequest {
+    public static class Save {
 
         @NotEmpty
         private String name;
@@ -23,7 +23,7 @@ public class MemberDto {
     }
 
     @Getter
-    public static class UpdateRequest {
+    public static class Update {
 
         private String name;
 
