@@ -3,7 +3,8 @@ package com.toy.shop.service;
 import com.toy.shop.domain.Member;
 import com.toy.shop.dto.MemberDto;
 import com.toy.shop.exception.CommonException;
-import com.toy.shop.repository.MemberJpaRepository;
+import com.toy.shop.repository.member.MemberCustomRepository;
+import com.toy.shop.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +18,8 @@ import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberJpaRepository memberRepository;
-//    private final MemberSpringJpaRepository memberRepository;
+    private final MemberRepository memberRepository;
+    private final MemberCustomRepository memberCustomRepository;
 
     @Override
     @Transactional

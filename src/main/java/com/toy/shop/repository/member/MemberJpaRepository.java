@@ -1,4 +1,4 @@
-package com.toy.shop.repository;
+package com.toy.shop.repository.member;
 
 import com.toy.shop.domain.Member;
 import jakarta.persistence.EntityManager;
@@ -9,23 +9,14 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemberJpaRepository {
+public class MemberJpaRepository implements MemberCustomRepository {
 
     private final EntityManager entityManager;
 
-    public Member save(Member member) {
-        if (member.getId() == null) {
-            entityManager.persist(member);
-            return member;
-        } else {
-            return entityManager.merge(member);
-        }
-    }
-
+    @Override
     public List<Member> findAll(String name) {
         String jpql = "select m from Member m";
 
@@ -43,13 +34,5 @@ public class MemberJpaRepository {
         if (StringUtils.hasText(name)) query.setParameter("name", name);
 
         return query.getResultList();
-    }
-
-    public Optional<Member> findById(Long id) {
-        return Optional.ofNullable(entityManager.find(Member.class, id));
-    }
-
-    public void delete(Member member) {
-        entityManager.remove(member);
     }
 }
