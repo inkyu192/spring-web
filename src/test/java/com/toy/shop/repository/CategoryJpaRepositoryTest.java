@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CategoryJpaRepositoryTest {
 
     @Autowired
-    CategoryJpaRepository categoryJpaRepository;
+    CategoryRepository categoryJpaRepository;
 
     @Test
     public void basicCRUD() {

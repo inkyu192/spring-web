@@ -4,7 +4,7 @@ import com.toy.shop.common.ResultCode;
 import com.toy.shop.domain.Category;
 import com.toy.shop.dto.CategoryDto;
 import com.toy.shop.exception.CommonException;
-import com.toy.shop.repository.CategoryJpaRepository;
+import com.toy.shop.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryJpaRepository categoryRepository;
-//    private final CategorySpringJpaRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     @Transactional

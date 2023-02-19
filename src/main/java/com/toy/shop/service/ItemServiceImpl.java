@@ -5,7 +5,7 @@ import com.toy.shop.domain.Category;
 import com.toy.shop.domain.Item;
 import com.toy.shop.dto.ItemDto;
 import com.toy.shop.exception.CommonException;
-import com.toy.shop.repository.CategoryJpaRepository;
+import com.toy.shop.repository.CategoryRepository;
 import com.toy.shop.repository.ItemJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,7 @@ public class ItemServiceImpl implements ItemService {
     private final ItemJpaRepository itemRepository;
 //    private final ItemSpringJpaRepository itemRepository;
 
-    private final CategoryJpaRepository categoryRepository;
-//    private final CategorySpringJpaRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     @Transactional
