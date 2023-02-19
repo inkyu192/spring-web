@@ -5,7 +5,7 @@ import com.toy.shop.domain.*;
 import com.toy.shop.dto.OrderDto;
 import com.toy.shop.exception.CommonException;
 import com.toy.shop.repository.ItemJpaRepository;
-import com.toy.shop.repository.member.MemberRepository;
+import com.toy.shop.repository.MemberRepository;
 import com.toy.shop.repository.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,6 @@ import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
-//    private final MemberSpringJpaRepository memberRepository;
 
     private final ItemJpaRepository itemRepository;
 //    private final ItemSpringJpaRepository itemRepository;

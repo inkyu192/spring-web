@@ -2,7 +2,7 @@ package com.toy.shop.controller;
 
 import com.toy.shop.common.ResultDto;
 import com.toy.shop.dto.MemberDto;
-import com.toy.shop.service.member.MemberService;
+import com.toy.shop.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

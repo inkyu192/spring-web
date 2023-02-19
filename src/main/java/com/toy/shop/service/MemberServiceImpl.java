@@ -1,10 +1,9 @@
-package com.toy.shop.service.member;
+package com.toy.shop.service;
 
 import com.toy.shop.domain.Member;
 import com.toy.shop.dto.MemberDto;
 import com.toy.shop.exception.CommonException;
-import com.toy.shop.repository.member.MemberCustomRepository;
-import com.toy.shop.repository.member.MemberRepository;
+import com.toy.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,6 @@ import static com.toy.shop.common.ResultCode.MEMBER_NOT_FOUND;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
-    private final MemberCustomRepository memberCustomRepository;
 
     @Override
     @Transactional
@@ -33,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberDto.Response> members(String name) {
-        List<Member> members = memberRepository.findAll(name);
+        List<Member> members = memberRepository.findAllByJpa(name);
 
         return members.stream()
                 .map(MemberDto.Response::new)

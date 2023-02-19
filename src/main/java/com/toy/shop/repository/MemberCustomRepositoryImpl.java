@@ -1,32 +1,51 @@
-package com.toy.shop.repository.member;
+package com.toy.shop.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.shop.domain.Member;
 import jakarta.persistence.EntityManager;
-import org.springframework.context.annotation.Primary;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.toy.shop.domain.QMember.member;
 
-
-@Primary
 @Repository
-public class MemberQueryRepository implements MemberCustomRepository {
+public class MemberCustomRepositoryImpl implements MemberCustomRepository {
 
     private final EntityManager entityManager;
     private final JPAQueryFactory queryFactory;
 
-    public MemberQueryRepository(EntityManager entityManager) {
+    public MemberCustomRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
 
     @Override
-    public List<Member> findAll(String name) {
+    public List<Member> findAllByJpql(String name) {
+        String jpql = "select m from Member m";
+
+        ArrayList<String> whereCondition = new ArrayList<>();
+
+        if (StringUtils.hasText(name)) whereCondition.add("m.name like concat('%', :name, '%')");
+
+        if (!whereCondition.isEmpty()) {
+            jpql += " where ";
+            jpql += String.join(" and ", whereCondition);
+        }
+
+        TypedQuery<Member> query = entityManager.createQuery(jpql, Member.class);
+
+        if (StringUtils.hasText(name)) query.setParameter("name", name);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Member> findAllByQuery(String name) {
         return queryFactory
                 .select(member)
                 .from(member)
