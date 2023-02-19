@@ -25,7 +25,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     @Override
-    public List<Member> findAllByJpql(String name) {
+    public List<Member> findAllOfJpql(String name) {
         String jpql = "select m from Member m";
 
         ArrayList<String> whereCondition = new ArrayList<>();
@@ -45,7 +45,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     @Override
-    public List<Member> findAllByQuery(String name) {
+    public List<Member> findAllOfQuery(String name) {
         return queryFactory
                 .select(member)
                 .from(member)

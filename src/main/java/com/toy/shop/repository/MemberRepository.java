@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long>, MemberCustomRepository {
 
-    @Query("select m from Member m where (:name is null or m.name like concat('%', :name, '%'))")
-    List<Member> findAllByJpa(@Param("name") String name);
+    @Query(
+        "select m" +
+        " from Member m" +
+        " where (:name is null or m.name like concat('%', :name, '%'))"
+    )
+    List<Member> findAllOfJpa(@Param("name") String name);
 }

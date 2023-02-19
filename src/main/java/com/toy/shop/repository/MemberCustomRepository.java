@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MemberCustomRepository {
 
-    List<Member> findAllByJpql(String searchWord);
+    List<Member> findAllOfJpql(String searchWord);
 
-    List<Member> findAllByQuery(String searchWord);
+    List<Member> findAllOfQuery(String searchWord);
 }
