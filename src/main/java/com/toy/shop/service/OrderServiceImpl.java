@@ -6,7 +6,7 @@ import com.toy.shop.dto.OrderDto;
 import com.toy.shop.exception.CommonException;
 import com.toy.shop.repository.ItemRepository;
 import com.toy.shop.repository.MemberRepository;
-import com.toy.shop.repository.OrderJpaRepository;
+import com.toy.shop.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final ItemRepository itemRepository;
 
-    private final OrderJpaRepository orderRepository;
-//    private final OrderSpringJpaRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     @Transactional
@@ -53,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto.Response> orders(Long memberId, OrderStatus orderStatus, DeliveryStatus deliveryStatus) {
-        List<Order> orders = orderRepository.findAll(memberId, orderStatus, deliveryStatus);
+        List<Order> orders = orderRepository.findAllOfJpa(memberId, orderStatus, deliveryStatus);
 
         return orders.stream()
                 .map(OrderDto.Response::new)
