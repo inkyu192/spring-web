@@ -4,7 +4,7 @@ import com.toy.shop.common.ResultCode;
 import com.toy.shop.domain.*;
 import com.toy.shop.dto.OrderDto;
 import com.toy.shop.exception.CommonException;
-import com.toy.shop.repository.ItemJpaRepository;
+import com.toy.shop.repository.ItemRepository;
 import com.toy.shop.repository.MemberRepository;
 import com.toy.shop.repository.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +24,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
 
-    private final ItemJpaRepository itemRepository;
-//    private final ItemSpringJpaRepository itemRepository;
+    private final ItemRepository itemRepository;
 
     private final OrderJpaRepository orderRepository;
 //    private final OrderSpringJpaRepository orderRepository;

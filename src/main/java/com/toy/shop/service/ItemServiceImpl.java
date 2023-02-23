@@ -6,7 +6,7 @@ import com.toy.shop.domain.Item;
 import com.toy.shop.dto.ItemDto;
 import com.toy.shop.exception.CommonException;
 import com.toy.shop.repository.CategoryRepository;
-import com.toy.shop.repository.ItemJpaRepository;
+import com.toy.shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemJpaRepository itemRepository;
-//    private final ItemSpringJpaRepository itemRepository;
+    private final ItemRepository itemRepository;
 
     private final CategoryRepository categoryRepository;
 
@@ -37,7 +36,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto.Response> items(Long categoryId, String name) {
-        List<Item> items = itemRepository.findAll(categoryId, name);
+        List<Item> items = itemRepository.findAllOfJpa(categoryId, name);
 
         return items.stream()
                 .map(ItemDto.Response::new)
